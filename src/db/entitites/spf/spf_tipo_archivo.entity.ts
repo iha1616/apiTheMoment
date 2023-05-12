@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { ArchivosProyectoEntity } from "./spf_archivos_proyecto.entity";
 
 @Entity('spf_tipo_archivo')
 export class TipoArchivoEntity {
@@ -7,4 +8,7 @@ export class TipoArchivoEntity {
 
    @Column()
    nombreTipoArchivo: string;
+
+   @OneToMany(() => ArchivosProyectoEntity, (proyectoArchivo) => proyectoArchivo.tipoArchivo)
+   archivosProyecto: ArchivosProyectoEntity[];
 }

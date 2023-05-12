@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { UsuariosEntity } from './usuarios.entity';
 
 @Entity('tipo_documento')
 export class TipoDocumentoEntity {
@@ -7,4 +8,7 @@ export class TipoDocumentoEntity {
 
    @Column()
    nombreTipoDocumento: string;
+
+   @OneToMany(() => UsuariosEntity, (usuario) => usuario.usuarioTipoDocumento)
+   usuariosTipoDoc: UsuariosEntity[];
 }

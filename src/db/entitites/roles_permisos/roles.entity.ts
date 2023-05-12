@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { PermisosEntity } from "./permisos.entity";
+import { UsuariosEntity } from "../usuarios/usuarios.entity";
 
 @Entity('roles')
 export class RolesEntity {
@@ -7,4 +9,10 @@ export class RolesEntity {
 
    @Column()
    nombreRol: string;
+
+   @OneToMany(() => UsuariosEntity, (usuario) => usuario.usuarioRol)
+   usuariosRol: UsuariosEntity[];
+
+   @ManyToMany(() => PermisosEntity, (permiso) => permiso.roles)
+   permisos: PermisosEntity[];
 }

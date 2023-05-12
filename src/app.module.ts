@@ -18,13 +18,12 @@ import { PlanMejoramientoEntity } from './db/entitites/plan_mejoramiento/plan_me
 import { EstadoQuejasEntity } from './db/entitites/quejas/estados_quejas.entity';
 import { QuejasComiteEntity } from './db/entitites/quejas/quejas_comite.entity';
 import { ArchivosProyectoEntity } from './db/entitites/spf/spf_archivos_proyecto.entity';
-import { GrupoAprendizFichaEntity } from './db/entitites/spf/spf_grupo_aprendiz_ficha.entity';
 import { GruposProyectoEntity } from './db/entitites/spf/spf_grupos_proyecto.entity';
 import { TipoArchivoEntity } from './db/entitites/spf/spf_tipo_archivo.entity';
 import { EstadoDecisionEntity } from './db/entitites/utilitis/estado_decision.entity';
 import { MotivosComiteEntity } from './db/entitites/utilitis/motivos_comite.entity';
 
-const allEntities = [RolesEntity, PermisosEntity, RolesPermisosEntity, TipoDocumentoEntity, UsuariosEntity, AprendicesEntity, ProgramasFormativosEntity, CompetenciaEntity, ResultadoAprendizajeEntity, FichasEntity, PCAEntity, ComiteEntity, EntregaFichaEntity, ObservacionesAprendizEntity, PlanMejoramientoEntity, EstadoQuejasEntity, QuejasComiteEntity, ArchivosProyectoEntity, GrupoAprendizFichaEntity, GruposProyectoEntity, TipoArchivoEntity, EstadoDecisionEntity, MotivosComiteEntity]
+const allEntities = [RolesEntity, PermisosEntity, RolesPermisosEntity, TipoDocumentoEntity, UsuariosEntity, AprendicesEntity, ProgramasFormativosEntity, CompetenciaEntity, ResultadoAprendizajeEntity, FichasEntity, PCAEntity, ComiteEntity, EntregaFichaEntity, ObservacionesAprendizEntity, PlanMejoramientoEntity, EstadoQuejasEntity, QuejasComiteEntity, ArchivosProyectoEntity, GruposProyectoEntity, TipoArchivoEntity, EstadoDecisionEntity, MotivosComiteEntity]
 
 @Module({
    imports: [TypeOrmModule.forRoot({
@@ -37,6 +36,7 @@ const allEntities = [RolesEntity, PermisosEntity, RolesPermisosEntity, TipoDocum
       entities: [...allEntities],
       // autoLoadEntities: true,
       synchronize: true,
+      // logging: true
    })],
    controllers: [],
    providers: [],
