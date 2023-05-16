@@ -21,19 +21,19 @@ export class ObservacionesAprendizEntity {
    @Column()
    descripcionMotivo: string;
 
-   @ManyToOne(() => EstadoDecisionEntity, (estadoDecision) => estadoDecision.decisiones)
+   @ManyToOne(() => EstadoDecisionEntity, (estadoDecision) => estadoDecision.observacionesDecision)
    @JoinColumn({ name: "idEstadoDecision" })
-   decisionAprendiz: EstadoDecisionEntity;
+   decisionObservacion: EstadoDecisionEntity;
 
-   @ManyToOne(() => MotivosComiteEntity, (motivoComite) => motivoComite.motivos)
+   @ManyToOne(() => MotivosComiteEntity, (motivoComite) => motivoComite.observacionesMotivo)
    @JoinColumn({ name: "idMotivoComite" })
-   motivoAprendiz: MotivosComiteEntity;
+   motivoObservacion: MotivosComiteEntity;
 
-   @ManyToOne(() => AprendicesEntity, (aprendiz) => aprendiz.aprendicesObservacion)
+   @ManyToOne(() => AprendicesEntity, (aprendiz) => aprendiz.observacionesAprendiz)
    @JoinColumn({ name: "idAprendiz" })
-   observacionAprendiz: AprendicesEntity;
+   aprendizObservacion: AprendicesEntity;
 
-   @ManyToOne(() => UsuariosEntity, (usuario) => usuario.observacionesAprendiz)
+   @ManyToOne(() => UsuariosEntity, (usuario) => usuario.observacionesUsuario)
    @JoinColumn({ name: "idUsuario" })
    usuarioObservacion: UsuariosEntity;
 }

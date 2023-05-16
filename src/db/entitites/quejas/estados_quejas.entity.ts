@@ -9,6 +9,6 @@ export class EstadoQuejasEntity {
    @Column()
    nombreEstadoQuejas: string;
 
-   @OneToMany(() => QuejasComiteEntity, (quejas) => quejas.quejaEstado)
-   estadosQuejas: QuejasComiteEntity[];
+   @OneToMany(() => QuejasComiteEntity, (quejas) => quejas.estadoQueja)
+   quejasEstado: QuejasComiteEntity[];
 }

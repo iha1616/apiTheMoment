@@ -10,9 +10,9 @@ export class EstadoDecisionEntity {
    @Column()
    nombreEstadoDecision: string;
 
-   @OneToMany(() => ObservacionesAprendizEntity, (observacionesAprendices) => observacionesAprendices.decisionAprendiz)
-   decisiones: ObservacionesAprendizEntity[];
+   @OneToMany(() => ObservacionesAprendizEntity, (observacionesAprendiz) => observacionesAprendiz.decisionObservacion)
+   observacionesDecision: ObservacionesAprendizEntity[];
 
-   @OneToMany(() => PlanMejoramientoEntity, (planMejoramiento) => planMejoramiento.planEstadoDecision)
-   estadoDecisionPlan: PlanMejoramientoEntity[];
+   @OneToMany(() => PlanMejoramientoEntity, (planMejoramiento) => planMejoramiento.decisionPlanMejoramiento)
+   planMejoramientoDecisiones: PlanMejoramientoEntity[];
 }

@@ -22,8 +22,9 @@ import { GruposProyectoEntity } from './db/entitites/spf/spf_grupos_proyecto.ent
 import { TipoArchivoEntity } from './db/entitites/spf/spf_tipo_archivo.entity';
 import { EstadoDecisionEntity } from './db/entitites/utilitis/estado_decision.entity';
 import { MotivosComiteEntity } from './db/entitites/utilitis/motivos_comite.entity';
+import { ProgramaCompetenciaEntity } from './db/entitites/area_formativa/programa_competencia.entity';
 
-const allEntities = [RolesEntity, PermisosEntity, RolesPermisosEntity, TipoDocumentoEntity, UsuariosEntity, AprendicesEntity, ProgramasFormativosEntity, CompetenciaEntity, ResultadoAprendizajeEntity, FichasEntity, PCAEntity, ComiteEntity, EntregaFichaEntity, ObservacionesAprendizEntity, PlanMejoramientoEntity, EstadoQuejasEntity, QuejasComiteEntity, ArchivosProyectoEntity, GruposProyectoEntity, TipoArchivoEntity, EstadoDecisionEntity, MotivosComiteEntity]
+const allEntities = [RolesEntity, PermisosEntity, RolesPermisosEntity, ProgramaCompetenciaEntity, TipoDocumentoEntity, UsuariosEntity, AprendicesEntity, ProgramasFormativosEntity, CompetenciaEntity, ResultadoAprendizajeEntity, FichasEntity, PCAEntity, ComiteEntity, EntregaFichaEntity, ObservacionesAprendizEntity, PlanMejoramientoEntity, EstadoQuejasEntity, QuejasComiteEntity, ArchivosProyectoEntity, GruposProyectoEntity, TipoArchivoEntity, EstadoDecisionEntity, MotivosComiteEntity]
 
 @Module({
    imports: [TypeOrmModule.forRoot({
@@ -35,7 +36,7 @@ const allEntities = [RolesEntity, PermisosEntity, RolesPermisosEntity, TipoDocum
       database: 'senastion_2',
       entities: [...allEntities],
       // autoLoadEntities: true,
-      synchronize: true,
+      synchronize: false,
       // logging: true
    })],
    controllers: [],

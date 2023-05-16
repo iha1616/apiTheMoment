@@ -11,16 +11,16 @@ export class ProgramasFormativosEntity {
    @Column()
    nombrePF: string;
 
-   @Column()
+   @Column({ type: "bigint" })
    codigoPF: number;
 
    @Column()
    trimestres: number;
 
-   @OneToMany(() => CompetenciaEntity, (competencia) => competencia.idProgramaFormativo)
-   competenciasPrograma: CompetenciaEntity[];
+   @ManyToMany(() => CompetenciaEntity, (competencia) => competencia.programasCompetencia)
+   competenciaPrograma: CompetenciaEntity[];
 
-   @ManyToMany(() => UsuariosEntity, (usuario) => usuario.programasUsuarios)
+   @ManyToMany(() => UsuariosEntity, (usuario) => usuario.programaUsuarios)
    usuariosPrograma: UsuariosEntity[];
 
    @OneToMany(() => FichasEntity, (fichas) => fichas.programaFicha)

@@ -10,12 +10,12 @@ export class PCAEntity {
 
    @ManyToOne(() => ProgramasFormativosEntity, (programaFormativo) => programaFormativo.usuariosPrograma)
    @JoinColumn({ name: "idProgramaFormativo" })
-   idPrograma: ProgramasFormativosEntity;
+   programaFormativo: ProgramasFormativosEntity;
 
-   @ManyToOne(() => UsuariosEntity, (usuarios) => usuarios.programasUsuarios)
+   @ManyToOne(() => UsuariosEntity, (usuarios) => usuarios.programaUsuarios)
    @JoinColumn({ name: "idUsuario" })
-   idUsuario: UsuariosEntity;
+   usuario: UsuariosEntity;
 
-   @OneToMany(() => ComiteEntity, (comitePrograma) => comitePrograma.programaCoordinacion)
-   comites: ComiteEntity[];
+   @OneToMany(() => ComiteEntity, (comite) => comite.pcaComite)
+   comitesPCA: ComiteEntity[];
 }

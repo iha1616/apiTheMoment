@@ -9,7 +9,7 @@ export class FichasEntity {
    @PrimaryGeneratedColumn()
    idFicha: number;
 
-   @Column()
+   @Column({ type: "bigint" })
    codigoFicha: number;
 
    @Column()
@@ -18,7 +18,7 @@ export class FichasEntity {
    @Column({ nullable: true })
    voceroFicha: string;
 
-   @OneToMany(() => AprendicesEntity, (aprendicesFicha) => aprendicesFicha.idFichaAprendiz)
+   @OneToMany(() => AprendicesEntity, (aprendices) => aprendices.fichaAprendiz)
    aprendicesFicha: AprendicesEntity[];
 
    @ManyToOne(() => ProgramasFormativosEntity, (programaFormativo) => programaFormativo.fichasPrograma)
@@ -28,6 +28,6 @@ export class FichasEntity {
    @OneToMany(() => GruposProyectoEntity, (gruposProyecto) => gruposProyecto.fichaGrupo)
    gruposFicha: GruposProyectoEntity[];
 
-   @OneToMany(() => EntregaFichaEntity, (entrega) => entrega.ficha)
+   @OneToMany(() => EntregaFichaEntity, (entregaFicha) => entregaFicha.fichaEntrega)
    entregasFicha: EntregaFichaEntity[];
 }

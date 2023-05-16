@@ -16,23 +16,23 @@ export class PlanMejoramientoEntity {
    @Column({ nullable: true })
    descripcionMotivo: string;
 
-   @ManyToOne(() => QuejasComiteEntity, (quejas) => quejas.quejasPlanMejoramiento)
+   @ManyToOne(() => QuejasComiteEntity, (quejas) => quejas.planMejoramientoQuejas)
    @JoinColumn({ name: "IdQueja" })
-   planQueja: QuejasComiteEntity;
+   quejaPlanMejoramiento: QuejasComiteEntity;
 
-   @ManyToOne(() => MotivosComiteEntity, (motivoComite) => motivoComite.motivosPlanMejoramiento)
+   @ManyToOne(() => MotivosComiteEntity, (motivoComite) => motivoComite.planMejoramientoMotivos)
    @JoinColumn({ name: "idMotivoComite" })
-   planMotivo: MotivosComiteEntity;
+   motivoPlanMejoramiento: MotivosComiteEntity;
 
-   @ManyToOne(() => EstadoDecisionEntity, (estadoDecision) => estadoDecision.estadoDecisionPlan)
+   @ManyToOne(() => EstadoDecisionEntity, (estadoDecision) => estadoDecision.planMejoramientoDecisiones)
    @JoinColumn({ name: "idEstadoDecision" })
-   planEstadoDecision: EstadoDecisionEntity;
+   decisionPlanMejoramiento: EstadoDecisionEntity;
 
-   @ManyToOne(() => AprendicesEntity, (aprendices) => aprendices.planesAprendices)
+   @ManyToOne(() => AprendicesEntity, (aprendices) => aprendices.planMejoramientoAprendices)
    @JoinColumn({ name: "idAprendiz" })
-   planAprendiz: AprendicesEntity;
+   aprendizPlanMejoramiento: AprendicesEntity;
 
-   @ManyToOne(() => UsuariosEntity, (usuario) => usuario.planesUsuarios)
+   @ManyToOne(() => UsuariosEntity, (usuario) => usuario.planMejoramientoUsuarios)
    @JoinColumn({ name: "idUsuario" })
-   planUsuario: UsuariosEntity;
+   usuarioPlanMejoramiento: UsuariosEntity;
 }

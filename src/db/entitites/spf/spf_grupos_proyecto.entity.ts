@@ -11,13 +11,13 @@ export class GruposProyectoEntity {
    @Column()
    nombreProyecto: string;
 
-   @OneToMany(() => AprendicesEntity, (aprendices) => aprendices.idGrupoProyecto)
+   @OneToMany(() => AprendicesEntity, (aprendices) => aprendices.grupoAprendiz)
    aprendicesGrupo: AprendicesEntity[];
 
    @ManyToOne(() => FichasEntity, (fichas) => fichas.gruposFicha)
    @JoinColumn({ name: "idFicha" })
    fichaGrupo: FichasEntity;
 
-   @OneToMany(() => ArchivosProyectoEntity, (proyectoArchivos) => proyectoArchivos.archivoProyecto)
-   grupoArchivos: ArchivosProyectoEntity[];
+   @OneToMany(() => ArchivosProyectoEntity, (archivosProyecto) => archivosProyecto.archivoProyecto)
+   archivosGrupo: ArchivosProyectoEntity[];
 }

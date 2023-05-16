@@ -10,6 +10,6 @@ export class PermisosEntity {
    @Column()
    nombrePermiso: string;
 
-   @ManyToMany(() => RolesEntity, (rol) => rol.permisos)
-   roles: RolesEntity[];
+   @ManyToMany(() => RolesEntity, (rol) => rol.permisosRol)
+   rolPermisos: RolesEntity[];
 }

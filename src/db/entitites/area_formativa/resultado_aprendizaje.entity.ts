@@ -10,13 +10,13 @@ export class ResultadoAprendizajeEntity {
    @Column()
    nombreRA: string;
 
-   @Column()
+   @Column({ type: "bigint" })
    codigoRA: number;
 
    @ManyToOne(() => CompetenciaEntity, (competencia) => competencia.resultadosCompetencia)
    @JoinColumn({ name: "IdCompetencia" })
-   idCompetencia: CompetenciaEntity;
+   competenciaResultado: CompetenciaEntity;
 
-   @OneToMany(() => EntregaFichaEntity, (entrega) => entrega.resultadoAprendizaje)
-   entregasResultadoAprendizaje: EntregaFichaEntity[];
+   @OneToMany(() => EntregaFichaEntity, (entregaFicha) => entregaFicha.resultadoEntregaFicha)
+   entregasFichaResultado: EntregaFichaEntity[];
 }

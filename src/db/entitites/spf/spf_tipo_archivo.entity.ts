@@ -10,5 +10,5 @@ export class TipoArchivoEntity {
    nombreTipoArchivo: string;
 
    @OneToMany(() => ArchivosProyectoEntity, (proyectoArchivo) => proyectoArchivo.tipoArchivo)
-   archivosProyecto: ArchivosProyectoEntity[];
+   archivosTipo: ArchivosProyectoEntity[];
 }

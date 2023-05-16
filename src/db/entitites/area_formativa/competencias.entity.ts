@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ProgramasFormativosEntity } from './programas_formativos.entity';
 import { ResultadoAprendizajeEntity } from './resultado_aprendizaje.entity';
 import { EntregaFichaEntity } from '../entrega_ficha/entrega_ficha.entity';
@@ -11,16 +11,15 @@ export class CompetenciaEntity {
    @Column()
    nombreCompetencia: string;
 
-   @Column()
+   @Column({ type: "bigint" })
    codigoCompetencia: number;
 
-   @OneToMany(() => ResultadoAprendizajeEntity, (resultadoAprendizaje) => resultadoAprendizaje.idCompetencia)
+   @OneToMany(() => ResultadoAprendizajeEntity, (resultadoAprendizaje) => resultadoAprendizaje.competenciaResultado)
    resultadosCompetencia: ResultadoAprendizajeEntity[];
 
-   @ManyToOne(() => ProgramasFormativosEntity, (programaFormativo) => programaFormativo.competenciasPrograma)
-   @JoinColumn({ name: "idProgramaFormativo" })
-   idProgramaFormativo: ProgramasFormativosEntity;
+   @ManyToMany(() => ProgramasFormativosEntity, (programaFormativo) => programaFormativo.competenciaPrograma)
+   programasCompetencia: ProgramasFormativosEntity[];
 
-   @OneToMany(() => EntregaFichaEntity, (entrega) => entrega.competencia)
-   entregasCompetencia: EntregaFichaEntity[];
+   @OneToMany(() => EntregaFichaEntity, (entregaFicha) => entregaFicha.competenciaEntregaFicha)
+   entregasFichaCompetencia: EntregaFichaEntity[];
 }

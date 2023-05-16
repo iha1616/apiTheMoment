@@ -20,17 +20,17 @@ export class EntregaFichaEntity {
 
    @ManyToOne(() => FichasEntity, (ficha) => ficha.entregasFicha)
    @JoinColumn({ name: "idFicha" })
-   ficha: FichasEntity;
+   fichaEntrega: FichasEntity;
 
-   @ManyToOne(() => CompetenciaEntity, (competencia) => competencia.entregasCompetencia)
+   @ManyToOne(() => CompetenciaEntity, (competencia) => competencia.entregasFichaCompetencia)
    @JoinColumn({ name: "idCompetencia" })
-   competencia: CompetenciaEntity;
+   competenciaEntregaFicha: CompetenciaEntity;
 
-   @ManyToOne(() => ResultadoAprendizajeEntity, (resultadoAprendizaje) => resultadoAprendizaje.entregasResultadoAprendizaje)
+   @ManyToOne(() => ResultadoAprendizajeEntity, (resultadoAprendizaje) => resultadoAprendizaje.entregasFichaResultado)
    @JoinColumn({ name: "idResultadoAprendizaje" })
-   resultadoAprendizaje: ResultadoAprendizajeEntity;
+   resultadoEntregaFicha: ResultadoAprendizajeEntity;
 
-   @ManyToOne(() => UsuariosEntity, (usuario) => usuario.entregasUsuario)
+   @ManyToOne(() => UsuariosEntity, (usuario) => usuario.entregasFichaUsuario)
    @JoinColumn({ name: "idUsuario" })
-   usuario: UsuariosEntity;
+   usuarioEntregaFicha: UsuariosEntity;
 }

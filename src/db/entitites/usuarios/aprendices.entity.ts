@@ -14,24 +14,24 @@ export class AprendicesEntity {
    @Column({ default: true })
    estadoAprendiz: boolean;
 
-   @ManyToOne(() => UsuariosEntity, (usuario) => usuario.usuarioAprendiz)
+   @ManyToOne(() => UsuariosEntity, (usuario) => usuario.aprendicesUsuario)
    @JoinColumn({ name: "idUsuario" })
-   aprendiz: UsuariosEntity;
+   usuarioAprendiz: UsuariosEntity;
 
    @ManyToOne(() => FichasEntity, (fichas) => fichas.aprendicesFicha)
    @JoinColumn({ name: "idFicha" })
-   idFichaAprendiz: FichasEntity;
+   fichaAprendiz: FichasEntity;
 
    @ManyToOne(() => GruposProyectoEntity, (grupoProyecto) => grupoProyecto.aprendicesGrupo)
    @JoinColumn({ name: "idGrupoProyecto" })
-   idGrupoProyecto: GruposProyectoEntity;
+   grupoAprendiz: GruposProyectoEntity;
 
-   @OneToMany(() => ObservacionesAprendizEntity, (observacionesAprendiz) => observacionesAprendiz.observacionAprendiz)
-   aprendicesObservacion: ObservacionesAprendizEntity[];
+   @OneToMany(() => ObservacionesAprendizEntity, (observacionesAprendiz) => observacionesAprendiz.aprendizObservacion)
+   observacionesAprendiz: ObservacionesAprendizEntity[];
 
-   @OneToMany(() => QuejasComiteEntity, (quejas) => quejas.quejaAprendiz)
-   aprendizQuejas: QuejasComiteEntity[];
+   @OneToMany(() => QuejasComiteEntity, (quejas) => quejas.aprendizQueja)
+   quejasAprendices: QuejasComiteEntity[];
 
-   @OneToMany(() => PlanMejoramientoEntity, (planMejoramiento) => planMejoramiento.planAprendiz)
-   planesAprendices: PlanMejoramientoEntity[];
+   @OneToMany(() => PlanMejoramientoEntity, (planMejoramiento) => planMejoramiento.aprendizPlanMejoramiento)
+   planMejoramientoAprendices: PlanMejoramientoEntity[];
 }

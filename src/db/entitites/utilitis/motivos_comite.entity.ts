@@ -11,12 +11,12 @@ export class MotivosComiteEntity {
    @Column()
    nombreMotivo: string;
 
-   @OneToMany(() => ObservacionesAprendizEntity, (motivosAprendices) => motivosAprendices.motivoAprendiz)
-   motivos: ObservacionesAprendizEntity[];
+   @OneToMany(() => ObservacionesAprendizEntity, (motivosComite) => motivosComite.motivoObservacion)
+   observacionesMotivo: ObservacionesAprendizEntity[];
 
-   @OneToMany(() => QuejasComiteEntity, (quejas) => quejas.quejaMotivo)
-   motivosQuejas: QuejasComiteEntity[];
+   @OneToMany(() => QuejasComiteEntity, (quejas) => quejas.motivoQueja)
+   quejasMotivo: QuejasComiteEntity[];
 
-   @OneToMany(() => PlanMejoramientoEntity, (planMejoramiento) => planMejoramiento.planMotivo)
-   motivosPlanMejoramiento: PlanMejoramientoEntity[];
+   @OneToMany(() => PlanMejoramientoEntity, (planMejoramiento) => planMejoramiento.motivoPlanMejoramiento)
+   planMejoramientoMotivos: PlanMejoramientoEntity[];
 }

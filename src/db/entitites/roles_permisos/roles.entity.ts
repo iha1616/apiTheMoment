@@ -10,9 +10,9 @@ export class RolesEntity {
    @Column()
    nombreRol: string;
 
-   @OneToMany(() => UsuariosEntity, (usuario) => usuario.usuarioRol)
+   @OneToMany(() => UsuariosEntity, (usuario) => usuario.rolUsuario)
    usuariosRol: UsuariosEntity[];
 
-   @ManyToMany(() => PermisosEntity, (permiso) => permiso.roles)
-   permisos: PermisosEntity[];
+   @ManyToMany(() => PermisosEntity, (permiso) => permiso.rolPermisos)
+   permisosRol: PermisosEntity[];
 }

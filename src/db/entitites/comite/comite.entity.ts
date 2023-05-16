@@ -10,13 +10,13 @@ export class ComiteEntity {
    @Column({ type: "datetime" })
    fechaHora: Date;
 
-   @Column()
-   codigoComite: number;
+   @Column({ type: "bigint" })
+   codigoComite: number; 
 
-   @ManyToOne(() => PCAEntity, (pca) => pca.comites)
+   @ManyToOne(() => PCAEntity, (pca) => pca.comitesPCA)
    @JoinColumn({ name: "idProgramaCoordinacionAcademica" })
-   programaCoordinacion: PCAEntity;
+   pcaComite: PCAEntity;
 
-   @OneToMany(() => QuejasComiteEntity, (quejas) => quejas.quejaComite)
-   comitesQuejas: QuejasComiteEntity[];
+   @OneToMany(() => QuejasComiteEntity, (quejas) => quejas.comiteQueja)
+   quejasComite: QuejasComiteEntity[];
 }

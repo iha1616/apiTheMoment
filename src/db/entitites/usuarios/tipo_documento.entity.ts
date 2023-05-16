@@ -9,6 +9,6 @@ export class TipoDocumentoEntity {
    @Column()
    nombreTipoDocumento: string;
 
-   @OneToMany(() => UsuariosEntity, (usuario) => usuario.usuarioTipoDocumento)
-   usuariosTipoDoc: UsuariosEntity[];
+   @OneToMany(() => UsuariosEntity, (usuario) => usuario.tipoDocumentoUsuario)
+   usuariosTipoDocumento: UsuariosEntity[];
 }

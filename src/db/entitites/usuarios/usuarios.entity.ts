@@ -14,7 +14,7 @@ export class UsuariosEntity {
    @PrimaryGeneratedColumn()
    idUsuario: number;
 
-   @Column({ unique: true })
+   @Column({ unique: true, type: "bigint" })
    documento: number;
 
    @Column()
@@ -26,38 +26,38 @@ export class UsuariosEntity {
    @Column({ unique: true })
    email: string;
 
-   @Column()
+   @Column({ type: "bigint" })
    telefono: number;
 
    @Column()
    password: string;
 
-   @ManyToOne(() => TipoDocumentoEntity, (tipoDoc) => tipoDoc.usuariosTipoDoc)
+   @ManyToOne(() => TipoDocumentoEntity, (tipoDocumento) => tipoDocumento.usuariosTipoDocumento)
    @JoinColumn({ name: "idTipoDocumento" })
-   usuarioTipoDocumento: TipoDocumentoEntity;
+   tipoDocumentoUsuario: TipoDocumentoEntity;
 
    @ManyToOne(() => RolesEntity, (rol) => rol.usuariosRol)
    @JoinColumn({ name: "idRol" })
-   usuarioRol: RolesEntity;
+   rolUsuario: RolesEntity;
 
-   @OneToMany(() => AprendicesEntity, (aprendiz) => aprendiz.aprendiz)
-   usuarioAprendiz: AprendicesEntity[];
+   @OneToMany(() => AprendicesEntity, (aprendices) => aprendices.usuarioAprendiz)
+   aprendicesUsuario: AprendicesEntity[];
 
    @ManyToMany(() => ProgramasFormativosEntity, (programaFormativo) => programaFormativo.usuariosPrograma)
-   programasUsuarios: ProgramasFormativosEntity[];
+   programaUsuarios: ProgramasFormativosEntity[];
 
-   @OneToMany(() => ArchivosProyectoEntity, (archivo) => archivo.archivoUsuario)
-   usuarioArchivos: ArchivosProyectoEntity[];
+   @OneToMany(() => ArchivosProyectoEntity, (archivosProyecto) => archivosProyecto.usuarioArchivo)
+   archivosUsuario: ArchivosProyectoEntity[];
 
-   @OneToMany(() => EntregaFichaEntity, (entrega) => entrega.usuario)
-   entregasUsuario: EntregaFichaEntity[];
+   @OneToMany(() => EntregaFichaEntity, (entregaFicha) => entregaFicha.usuarioEntregaFicha)
+   entregasFichaUsuario: EntregaFichaEntity[];
 
    @OneToMany(() => ObservacionesAprendizEntity, (observacionesAprendiz) => observacionesAprendiz.usuarioObservacion)
-   observacionesAprendiz: ObservacionesAprendizEntity[];
+   observacionesUsuario: ObservacionesAprendizEntity[];
 
-   @OneToMany(() => QuejasComiteEntity, (quejas) => quejas.quejaUsuario)
-   usuariosQuejas: QuejasComiteEntity[];
+   @OneToMany(() => QuejasComiteEntity, (quejas) => quejas.usuarioQueja)
+   quejasUsuarios: QuejasComiteEntity[];
 
-   @OneToMany(() => PlanMejoramientoEntity, (planMejoramiento) => planMejoramiento.planUsuario)
-   planesUsuarios: PlanMejoramientoEntity[];
+   @OneToMany(() => PlanMejoramientoEntity, (planMejoramiento) => planMejoramiento.usuarioPlanMejoramiento)
+   planMejoramientoUsuarios: PlanMejoramientoEntity[];
 }

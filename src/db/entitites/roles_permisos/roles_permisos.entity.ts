@@ -7,11 +7,11 @@ export class RolesPermisosEntity {
    @PrimaryGeneratedColumn()
    idRolPermiso: number;
 
-   @ManyToOne(() => RolesEntity, (rol) => rol.permisos)
+   @ManyToOne(() => RolesEntity, (rol) => rol.permisosRol)
    @JoinColumn({ name: "idRol" })
-   idRol: RolesEntity;
+   rol: RolesEntity;
 
-   @ManyToOne(() => PermisosEntity, (permisos) => permisos.roles)
+   @ManyToOne(() => PermisosEntity, (permisos) => permisos.rolPermisos)
    @JoinColumn({ name: "idPermiso" })
-   idPermiso: PermisosEntity;
+   permiso: PermisosEntity;
 }

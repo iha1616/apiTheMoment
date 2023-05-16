@@ -17,15 +17,15 @@ export class ArchivosProyectoEntity {
    @Column({ type: "blob" })
    archivoProyecto: string;
 
-   @ManyToOne(() => TipoArchivoEntity, (tipoArchivo) => tipoArchivo.archivosProyecto)
+   @ManyToOne(() => TipoArchivoEntity, (tipoArchivo) => tipoArchivo.archivosTipo)
    @JoinColumn({ name: "idTipoArchivo" })
    tipoArchivo: TipoArchivoEntity;
 
-   @ManyToOne(() => GruposProyectoEntity, (archivoGrupo) => archivoGrupo.grupoArchivos)
+   @ManyToOne(() => GruposProyectoEntity, (grupoProyecto) => grupoProyecto.archivosGrupo)
    @JoinColumn({ name: "idGrupoProyecto" })
-   proyectoArchivo: GruposProyectoEntity;
+   grupoArchivo: GruposProyectoEntity;
 
-   @ManyToOne(() => UsuariosEntity, (usuario) => usuario.usuarioArchivos)
+   @ManyToOne(() => UsuariosEntity, (usuario) => usuario.archivosUsuario)
    @JoinColumn({ name: "idUsuario" })
-   archivoUsuario: UsuariosEntity;
+   usuarioArchivo: UsuariosEntity;
 }
