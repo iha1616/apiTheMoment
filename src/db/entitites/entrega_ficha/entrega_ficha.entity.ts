@@ -15,7 +15,7 @@ export class EntregaFichaEntity {
    @Column()
    trimestre: number;
 
-   @Column({ type: "datetime" })
+   @Column({ type: "datetime", default: () => 'CURRENT_TIMESTAMP' })
    fechaHora: Date;
 
    @ManyToOne(() => FichasEntity, (ficha) => ficha.entregasFicha)

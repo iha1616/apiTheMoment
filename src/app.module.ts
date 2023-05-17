@@ -35,9 +35,8 @@ const allEntities = [RolesEntity, PermisosEntity, RolesPermisosEntity, ProgramaC
       password: '',
       database: 'senastion_2',
       entities: [...allEntities],
-      // autoLoadEntities: true,
+      autoLoadEntities: true,
       synchronize: false,
-      // logging: true
    })],
    controllers: [],
    providers: [],

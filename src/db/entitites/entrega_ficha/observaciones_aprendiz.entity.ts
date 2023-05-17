@@ -12,13 +12,13 @@ export class ObservacionesAprendizEntity {
    @Column()
    trimestre: number;
 
-   @Column({ type: "datetime" })
+   @Column({ type: "datetime", default: () => 'CURRENT_TIMESTAMP' })
    fechaHora: Date;
 
    @Column()
    ObservacionAprendiz: string;
 
-   @Column()
+   @Column({ nullable: true })
    descripcionMotivo: string;
 
    @ManyToOne(() => EstadoDecisionEntity, (estadoDecision) => estadoDecision.observacionesDecision)
