@@ -9,6 +9,8 @@
       "datetime",
       "descripcion",
       "entitites",
+      "mysql",
+      "nestjs",
       "observacion",
       "Observacion",
       "telefono",
