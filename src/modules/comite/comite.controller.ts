@@ -1,7 +1,9 @@
 import { Controller, Post, Get, Body, Param, ParseIntPipe } from '@nestjs/common';
 import { ComiteService } from './comite.service';
 import { CreateComiteDto, UpdateComiteDto } from './dto/comite.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags("Comité")
 @Controller('comite')
 export class ComiteController {
    constructor(private comiteService: ComiteService) {}
