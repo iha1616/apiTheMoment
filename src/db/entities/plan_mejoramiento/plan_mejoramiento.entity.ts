@@ -1,9 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { QuejasComiteEntity } from '../quejas/quejas_comite.entity';
-import { MotivosComiteEntity } from '../utilities/motivos_comite.entity';
-import { EstadoDecisionEntity } from '../utilities/estado_decision.entity';
-import { AprendicesEntity } from '../usuarios/aprendices.entity';
-import { UsuariosEntity } from '../usuarios/usuarios.entity';
+import { AprendicesEntity, EstadoDecisionEntity, MotivosComiteEntity, QuejasComiteEntity, UsuariosEntity } from '..';
 
 @Entity('plan_mejoramiento')
 export class PlanMejoramientoEntity {
@@ -26,8 +22,8 @@ export class PlanMejoramientoEntity {
    @JoinColumn({ name: "idAprendiz" })
    aprendizPlanMejoramiento: AprendicesEntity;
    
-   @ManyToOne(() => EstadoDecisionEntity, (estadoDecision) => estadoDecision.planMejoramientoDecisiones, { nullable: true, onUpdate: "CASCADE", onDelete: "CASCADE" })
-   @JoinColumn({ name: "idEstadoDecision" })
+   @ManyToOne(() => EstadoDecisionEntity, (estadoDecision) => estadoDecision.planMejoramientoDecisiones, { nullable: true, onUpdate: "CASCADE", onDelete: "CASCADE"})
+   @JoinColumn({ name: "idEstadoDecision"})
    decisionPlanMejoramiento: EstadoDecisionEntity;
 
    @ManyToOne(() => MotivosComiteEntity, (motivoComite) => motivoComite.planMejoramientoMotivos, { nullable: true, onUpdate: "CASCADE", onDelete: "CASCADE" })

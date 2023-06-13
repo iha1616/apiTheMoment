@@ -1,8 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { ProgramasFormativosEntity } from './programas_formativos.entity';
-import { AprendicesEntity } from '../usuarios/aprendices.entity';
-import { GruposProyectoEntity } from '../spf/spf_grupos_proyecto.entity';
-import { EntregaFichaEntity } from '../entrega_ficha/entrega_ficha.entity';
+import { AprendicesEntity, EntregaFichaEntity, GruposProyectoEntity, ProgramasFormativosEntity, UsuariosEntity } from '..';
 
 @Entity('fichas')
 export class FichasEntity {
@@ -13,15 +10,16 @@ export class FichasEntity {
    codigoFicha: number;
 
    @Column({ nullable: true })
-   directorFicha: string;
-
-   @Column({ nullable: true })
    voceroFicha: string;
    
    //======== Claves foránea de otras tablas ========
    @ManyToOne(() => ProgramasFormativosEntity, (programaFormativo) => programaFormativo.fichasPrograma, { nullable: false, onUpdate: "CASCADE", onDelete: "CASCADE" })
    @JoinColumn({ name: "idProgramaFormativo" })
    programaFicha: ProgramasFormativosEntity;
+
+   @ManyToOne(() => UsuariosEntity, (usuarios) => usuarios.fichaDirectorUsuario)
+   @JoinColumn({ name: "idUsuario" })
+   usuarioFichaDirector: UsuariosEntity;
 
    //======== Claves foráneas para otras tablas ========
    @OneToMany(() => AprendicesEntity, (aprendices) => aprendices.fichaAprendiz)
@@ -32,4 +30,7 @@ export class FichasEntity {
 
    @OneToMany(() => EntregaFichaEntity, (entregaFicha) => entregaFicha.fichaEntrega)
    entregasFicha: EntregaFichaEntity[];
+
+   @ManyToMany(() => UsuariosEntity, (usuarios) => usuarios.fichaUsuario)
+   usuarioFicha: UsuariosEntity[];
 }

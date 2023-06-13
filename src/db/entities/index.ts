@@ -12,6 +12,8 @@ export { ResultadoAprendizajeEntity } from "./area_formativa/resultado_aprendiza
 export { FichasEntity } from "./area_formativa/ficha.entity";
 export { UsuariosEntity } from "./usuarios/usuarios.entity";
 export { AprendicesEntity } from "./usuarios/aprendices.entity";
+export { AccesoEntity } from "./usuarios/acceso.entity";
+export { FichaUsuariosEntity } from "./area_formativa/ficha_usuario.entity";
 export { PCAEntity } from "./area_formativa/programa_coordinacion.entity";
 export { EntregaFichaEntity } from "./entrega_ficha/entrega_ficha.entity";
 export { ObservacionesAprendizEntity } from "./entrega_ficha/observaciones_aprendiz.entity";

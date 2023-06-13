@@ -1,7 +1,5 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { ProgramasFormativosEntity } from './programas_formativos.entity';
-import { UsuariosEntity } from '../usuarios/usuarios.entity';
-import { ComiteEntity } from '../comite/comite.entity';
+import { Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { ComiteEntity, ProgramasFormativosEntity, UsuariosEntity } from '..';
 
 @Entity('programa_coordinacion')
 export class PCAEntity {

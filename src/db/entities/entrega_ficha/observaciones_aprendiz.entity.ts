@@ -1,8 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { EstadoDecisionEntity } from '../utilities/estado_decision.entity';
-import { MotivosComiteEntity } from '../utilities/motivos_comite.entity';
-import { AprendicesEntity } from '../usuarios/aprendices.entity';
-import { UsuariosEntity } from '../usuarios/usuarios.entity';
+import { AprendicesEntity, EstadoDecisionEntity, UsuariosEntity } from '..';
 
 @Entity('observaciones_aprendiz')
 export class ObservacionesAprendizEntity {
@@ -30,11 +27,4 @@ export class ObservacionesAprendizEntity {
    @ManyToOne(() => EstadoDecisionEntity, (estadoDecision) => estadoDecision.observacionesDecision, { nullable: false, onUpdate: "CASCADE", onDelete: "CASCADE" })
    @JoinColumn({ name: "idEstadoDecision" })
    decisionObservacion: EstadoDecisionEntity;
-
-   @ManyToOne(() => MotivosComiteEntity, (motivoComite) => motivoComite.observacionesMotivo, { nullable: false, onUpdate: "CASCADE", onDelete: "CASCADE" })
-   @JoinColumn({ name: "idMotivoComite" })
-   motivoObservacion: MotivosComiteEntity;
-
-   @Column({ nullable: true })
-   descripcionMotivo: string;
 }

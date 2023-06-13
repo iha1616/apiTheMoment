@@ -1,12 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { UsuariosEntity } from './usuarios.entity';
-import { FichasEntity } from '../area_formativa/ficha.entity';
-import { GruposProyectoEntity } from '../spf/spf_grupos_proyecto.entity';
-import { ObservacionesAprendizEntity } from '../entrega_ficha/observaciones_aprendiz.entity';
-import { QuejasComiteEntity } from '../quejas/quejas_comite.entity';
-import { PlanMejoramientoEntity } from '../plan_mejoramiento/plan_mejoramiento.entity';
-import { TipoDocumentoEntity } from './tipo_documento.entity';
-import { RolesEntity } from '../roles_permisos/roles.entity';
+import { AccesoEntity, FichasEntity, GruposProyectoEntity, ObservacionesAprendizEntity, PlanMejoramientoEntity, QuejasComiteEntity, RolesEntity, TipoDocumentoEntity } from '..';
 
 @Entity('aprendices')
 export class AprendicesEntity {
@@ -50,6 +43,10 @@ export class AprendicesEntity {
    @ManyToOne(() => GruposProyectoEntity, (grupoProyecto) => grupoProyecto.aprendicesGrupo, { nullable: true, onUpdate: "CASCADE", onDelete: "CASCADE" })
    @JoinColumn({ name: "idGrupoProyecto" })
    grupoAprendiz: GruposProyectoEntity;
+
+   @ManyToOne(() => AccesoEntity, (acceso) => acceso.aprendicesAcceso, { nullable: false, onUpdate: "CASCADE", onDelete: "CASCADE"})
+   @JoinColumn({ name: "idAcceso" })
+   accesoAprendiz: AccesoEntity;
 
    //======== Claves foráneas para otras tablas ========
    @OneToMany(() => ObservacionesAprendizEntity, (observacionesAprendiz) => observacionesAprendiz.aprendizObservacion)

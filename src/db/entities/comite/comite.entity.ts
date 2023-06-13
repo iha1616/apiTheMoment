@@ -1,6 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { PCAEntity } from '../area_formativa/programa_coordinacion.entity';
-import { QuejasComiteEntity } from '../quejas/quejas_comite.entity';
+import { PCAEntity, QuejasComiteEntity } from '..';
 
 @Entity('comite')
 export class ComiteEntity {
@@ -15,6 +14,15 @@ export class ComiteEntity {
 
    @Column({ default: true })
    estadoComite: boolean;
+
+   @Column()
+   link: string;
+
+   @Column({ type: "blob", nullable: true })
+   acta: string;
+
+   @Column({ type: "blob", nullable: true })
+   resolucion: string;
    
    //======== Claves foránea de otras tablas ========
    @ManyToOne(() => PCAEntity, (pca) => pca.comitesPCA, { nullable: false, onUpdate: "CASCADE", onDelete: "CASCADE" })

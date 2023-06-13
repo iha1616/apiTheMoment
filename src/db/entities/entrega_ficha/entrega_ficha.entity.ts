@@ -1,8 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { FichasEntity } from '../area_formativa/ficha.entity';
-import { CompetenciaEntity } from '../area_formativa/competencias.entity';
-import { ResultadoAprendizajeEntity } from '../area_formativa/resultado_aprendizaje.entity';
-import { UsuariosEntity } from '../usuarios/usuarios.entity';
+import { CompetenciaEntity, FichasEntity, ResultadoAprendizajeEntity, UsuariosEntity } from '..';
 
 @Entity('entrega_ficha')
 export class EntregaFichaEntity {

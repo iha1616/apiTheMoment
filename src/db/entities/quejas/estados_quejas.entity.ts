@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { QuejasComiteEntity } from "./quejas_comite.entity";
+import { QuejasComiteEntity } from "..";
 
 @Entity('estado_quejas')
 export class EstadoQuejasEntity {

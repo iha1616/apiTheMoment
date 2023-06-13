@@ -1,8 +1,5 @@
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { ProgramasFormativosEntity } from './programas_formativos.entity';
-import { ResultadoAprendizajeEntity } from './resultado_aprendizaje.entity';
-import { EntregaFichaEntity } from '../entrega_ficha/entrega_ficha.entity';
-import { ArchivosProyectoEntity } from '../spf/spf_archivos_proyecto.entity';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { ArchivosProyectoEntity, EntregaFichaEntity, ProgramasFormativosEntity, ResultadoAprendizajeEntity } from '..';
 
 @Entity('competencias')
 export class CompetenciaEntity {

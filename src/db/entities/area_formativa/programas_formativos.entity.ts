@@ -1,7 +1,5 @@
 import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { CompetenciaEntity } from './competencias.entity';
-import { UsuariosEntity } from '../usuarios/usuarios.entity';
-import { FichasEntity } from './ficha.entity';
+import { CompetenciaEntity, FichasEntity, UsuariosEntity } from '..';
 
 @Entity('programas_formativos')
 export class ProgramasFormativosEntity {

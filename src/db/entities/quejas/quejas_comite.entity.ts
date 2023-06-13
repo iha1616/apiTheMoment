@@ -1,11 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { MotivosComiteEntity } from '../utilities/motivos_comite.entity';
-import { EstadoQuejasEntity } from './estados_quejas.entity';
-import { ComiteEntity } from '../comite/comite.entity';
-import { AprendicesEntity } from '../usuarios/aprendices.entity';
-import { UsuariosEntity } from '../usuarios/usuarios.entity';
-import { PlanMejoramientoEntity } from '../plan_mejoramiento/plan_mejoramiento.entity';
-import { DecisionesComiteEntity } from './decision_comite.entity';
+import { AprendicesEntity, ComiteEntity, DecisionesComiteEntity, EstadoQuejasEntity, MotivosComiteEntity, PlanMejoramientoEntity, UsuariosEntity } from '..';
 
 @Entity('quejas_comite')
 export class QuejasComiteEntity {
@@ -42,6 +36,12 @@ export class QuejasComiteEntity {
 
    @Column({ nullable: true })
    otraDecision: string;
+
+   @Column({ nullable: true, default: false })
+   asisteComite: boolean;
+
+   @Column({ nullable: true })
+   otrosInstructores: string;
 
    //======== Claves foráneas para otras tablas ========
    @OneToMany(() => PlanMejoramientoEntity, (planMejoramiento) => planMejoramiento.quejaPlanMejoramiento)

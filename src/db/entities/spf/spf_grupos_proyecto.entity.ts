@@ -1,7 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { AprendicesEntity } from '../usuarios/aprendices.entity';
-import { FichasEntity } from '../area_formativa/ficha.entity';
-import { ArchivosProyectoEntity } from './spf_archivos_proyecto.entity';
+import { AprendicesEntity, ArchivosProyectoEntity, FichasEntity } from '..';
 
 @Entity('spf_grupos_proyecto')
 export class GruposProyectoEntity {
