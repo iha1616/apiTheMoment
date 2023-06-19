@@ -5,6 +5,9 @@ import { AprendicesEntity, ComiteEntity, DecisionesComiteEntity, EstadoQuejasEnt
 export class QuejasComiteEntity {
    @PrimaryGeneratedColumn()
    idQueja: number;
+
+   @Column({ type: "blob" })
+   archivoQueja: string;
    
    //======== Claves foráneas de otras tablas ========
    @ManyToOne(() => AprendicesEntity, (aprendices) => aprendices.quejasAprendices, { nullable: false, onUpdate: "CASCADE", onDelete: "CASCADE" })

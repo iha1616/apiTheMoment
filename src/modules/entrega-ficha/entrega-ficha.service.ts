@@ -7,28 +7,36 @@ import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class EntregaFichaService {
-    constructor(@InjectRepository(EntregaFichaEntity) private entregaFichaRepository: Repository<EntregaFichaEntity>) { }
+   constructor(@InjectRepository(EntregaFichaEntity) private entregaFichaRepository: Repository<EntregaFichaEntity>) { }
 
-    async createEntregaFicha(EntregaFicha: crearEntregaFichaDto) {
-        const newEntregaFicha = await this.entregaFichaRepository.create(plainToClass(EntregaFichaEntity, EntregaFicha));
-        return this.entregaFichaRepository.save(newEntregaFicha);
+   async createEntregaFicha(EntregaFicha: crearEntregaFichaDto) {
+      const newEntregaFicha = await this.entregaFichaRepository.create(plainToClass(EntregaFichaEntity, EntregaFicha));
+      return this.entregaFichaRepository.save(newEntregaFicha);
 
-    }
-    async getEntregaFicha() {
-        return  await this.entregaFichaRepository.find({
-            relations:["usuarioEntregaFicha","fichaEntrega","competenciaEntregaFicha","resultadoEntregaFicha"]
-        })
-    }
+   }
 
-    async getOneEntregaFicha(idEntregaFicha: number) {
-        return await this.entregaFichaRepository.findOne({
-            where: {
-                idEntregaFicha
-            }
-        });
-    }
+   //  async getEntregaFicha() {
+   //      return  await this.entregaFichaRepository.find({
+   //          relations:["usuarioEntregaFicha","fichaEntrega","competenciaEntregaFicha","resultadoEntregaFicha"]
+   //      })
+   //  }
 
-    async updateEntregaFicha(idEntregaFicha: number, entregaFicha: actualizarEntregaFichaDto) {
-        return await this.entregaFichaRepository.update({ idEntregaFicha }, plainToClass(EntregaFichaEntity, entregaFicha));
-    }
+   async getEntregaFicha(fichaEntrega: any) {
+      return await this.entregaFichaRepository.find({
+         where: fichaEntrega,
+         relations: ["usuarioEntregaFicha", "fichaEntrega", "competenciaEntregaFicha", "resultadoEntregaFicha"]
+      })
+   }
+
+   async getOneEntregaFicha(idEntregaFicha: number) {
+      return await this.entregaFichaRepository.findOne({
+         where: {
+            idEntregaFicha
+         }
+      });
+   }
+
+   async updateEntregaFicha(idEntregaFicha: number, entregaFicha: actualizarEntregaFichaDto) {
+      return await this.entregaFichaRepository.update({ idEntregaFicha }, plainToClass(EntregaFichaEntity, entregaFicha));
+   }
 }

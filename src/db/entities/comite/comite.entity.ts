@@ -12,7 +12,7 @@ export class ComiteEntity {
    @Column({ type: "bigint" })
    codigoComite: number; 
 
-   @Column({ default: true })
+   @Column({ default: false })
    estadoComite: boolean;
 
    @Column()

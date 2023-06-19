@@ -12,8 +12,4 @@ export class CreateGrupoProyectoDto {
    fichaGrupo: number;
 }
 
-export class UpdateGrupoProyectoDto extends PartialType(CreateGrupoProyectoDto) {
-   @IsNotEmpty()
-   @ApiProperty()
-   idGrupoProyecto?: number;
-}
+export class UpdateGrupoProyectoDto extends PartialType(CreateGrupoProyectoDto) {}

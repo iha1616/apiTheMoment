@@ -20,16 +20,21 @@ export class ComiteService {
       })
    }
 
-   async actualizarComite(idComite: any, comite: UpdateComiteDto): Promise<ComiteEntity> {
-      const searchComite = await this.comiteService.findOne({
-         where: { idComite }
+   mostrarComite(idComite: any): Promise<ComiteEntity> {
+      return this.comiteService.findOne({
+         where: idComite,
+         relations: ["pcaComite", "pcaComite.programaFormativo", "pcaComite.usuario"]
       })
+   }
+
+   actualizarComite(idComite: any, comite: UpdateComiteDto): Promise<ComiteEntity> {
+      const searchComite = this.comiteService.findOne(idComite);
 
       if (!searchComite) {
          throw new Error("No se encontró el comité");
       }
 
-      const updateComite = this.comiteService.merge(searchComite, plainToClass(ComiteEntity, comite));
+      const updateComite = this.comiteService.merge(plainToClass(ComiteEntity, searchComite), plainToClass(ComiteEntity, comite));
       return this.comiteService.save(updateComite);
    }
 }

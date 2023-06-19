@@ -3,56 +3,50 @@ import { ObservacionesAprendizEntity } from 'src/db/entities/entrega_ficha/obser
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { plainToClass } from 'class-transformer';
-import { actualizarObservacionAprendizDto, crearObservacionAprendizDto } from './Dto/crear-observacion-aprendiz-dto';
-import { QuejasService } from '../quejas/quejas.service';
+import { crearObservacionAprendizDto } from './Dto/crear-observacion-aprendiz-dto';
+import { ApiTags } from '@nestjs/swagger';
 
-
+@ApiTags("Observaciones del Aprendiz")
 @Injectable()
 export class ObservacionesAprendizService {
+   constructor(@InjectRepository(ObservacionesAprendizEntity) private observacionesService: Repository<ObservacionesAprendizEntity>) { }
 
-    constructor(
-        @InjectRepository(ObservacionesAprendizEntity) private observacionesService  : Repository<ObservacionesAprendizEntity>,
-        private quejasService: QuejasService
-    ){}
+   async create(observacion: crearObservacionAprendizDto) {
+      const newQueja = this.observacionesService.create(plainToClass(ObservacionesAprendizEntity, observacion))
+      return await this.observacionesService.save(newQueja)
+      //! Se debe crear la queja desde aquí (tal vez recibiendo dos parámetros)
+   }
 
-    async create(observacion: crearObservacionAprendizDto){
-        const newQueja =  this.observacionesService.create(plainToClass(ObservacionesAprendizEntity, observacion))
+   //  getAllobservacionAprendiz(){
+   //      return this.observacionesService.find({
+   //          relations: ["aprendizObservacion", "usuarioObservacion", "decisionObservacion"]
+   //      })
+   //  }
 
+   getAllobservacionAprendiz(aprendizObservacion) {
+      return this.observacionesService.find({
+         where: aprendizObservacion,
+         relations: ["aprendizObservacion", "usuarioObservacion", "decisionObservacion"]
+      })
+   }
 
-        const queja = await this.quejasService.createQueja({
-            aprendizQueja: observacion.aprendizObservacion,
-            usuarioQueja: observacion.usuarioObservacion,
-            descripcionMotivo: observacion.descripcionMotivo,
-            motivoQueja: observacion.motivoObservacion,
-            estadoQueja: 1
-        });
+   getOneObservacionAprendiz(idObservaciones: number): Promise<ObservacionesAprendizEntity> {
+      return this.observacionesService.findOne({
+         where: { idObservacionAprendiz: idObservaciones },
+         relations: ["aprendizObservacion", "usuarioObservacion", "decisionObservacion"]
+      });
+   }
 
-        if(!queja) {
-            throw new Error("No se pudo guardar la observacion")
-        }
-
-        return await this.observacionesService.save(newQueja)
-    } 
-    getAllobservacionAprendiz(){
-        return this.observacionesService.find({
-            relations: ["aprendizObservacion", "usuarioObservacion", "decisionObservacion", "motivoObservacion"]
-        })
-    }
-    
-    getOneObservacionAprendiz(idObservaciones: number): Promise<ObservacionesAprendizEntity>{
-        return this.observacionesService.findOne({where : { idObservacionAprendiz: idObservaciones }});
-    }
-    
-    /* async updateObservacionAprendiz(idObservaciones: any, observacionAprendiz: actualizarObservacionAprendizDto): Promise<ObservacionesAprendizEntity> {
-        const searchObservacion = await this.observacionesService.findOne({
-           where: {}
-        })
-  
-        if (!searchObservacion) {
-           throw new Error("La queja no existe");
-        }
-           
-        const updateQueja = this.observacionesService.merge(searchObservacion, plainToClass(ObservacionesAprendizEntity, observacionAprendiz));
-        return this.observacionesService.save(updateQueja);
-     } */
+   /* async updateObservacionAprendiz(idObservaciones: any, observacionAprendiz: actualizarObservacionAprendizDto): Promise<ObservacionesAprendizEntity> {
+       const searchObservacion = await this.observacionesService.findOne({
+          where: {}
+       })
+ 
+       if (!searchObservacion) {
+          throw new Error("La queja no existe");
+       }
+          
+       const updateQueja = this.observacionesService.merge(searchObservacion, plainToClass(ObservacionesAprendizEntity, observacionAprendiz));
+       return this.observacionesService.save(updateQueja);
+    } */
 }

@@ -27,7 +27,4 @@ export class crearEntregaFichaDto {
 
 }
 
-export class actualizarEntregaFichaDto extends PartialType(crearEntregaFichaDto){
-    
-    
-} 
+export class actualizarEntregaFichaDto extends PartialType(crearEntregaFichaDto) {} 

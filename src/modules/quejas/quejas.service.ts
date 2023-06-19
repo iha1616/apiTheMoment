@@ -28,7 +28,6 @@ export class QuejasService {
       const searchQueja = await this.quejaRepository.findOne({
          where: { idQueja }
       })
-
       if (!searchQueja) {
          throw new Error("La queja no existe");
       }

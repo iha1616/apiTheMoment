@@ -8,10 +8,16 @@ export class EntregaFichaController {
 
     constructor(private EntregaFichaService:EntregaFichaService){}
 q
-    @Get()
-    mostar() {
-        return this.EntregaFichaService.getEntregaFicha();
+   //  @Get()
+   //  mostrar() {
+   //      return this.EntregaFichaService.getEntregaFicha();
+   //  }
+
+   @Get("ficha/:id")
+    mostrar(@Param('id', ParseIntPipe) id) {
+        return this.EntregaFichaService.getEntregaFicha(id);
     }
+    
     @Get(':id')
     buscarUno(@Param('id', ParseIntPipe) param) {
         return this.EntregaFichaService.getOneEntregaFicha(param);

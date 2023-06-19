@@ -1,13 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { GruposProyectoEntity } from 'src/db/entities';
+import { ArchivosProyectoEntity, GruposProyectoEntity } from 'src/db/entities';
 import { Repository } from 'typeorm';
 import { CreateGrupoProyectoDto, UpdateGrupoProyectoDto } from './dto/grupo-proyecto.dto';
 import { plainToClass } from 'class-transformer';
+import { CreateArchivoProyectoDto } from './dto/archivos-proyecto.dto';
 
 @Injectable()
 export class GrupoProyectoService {
-   constructor(@InjectRepository(GruposProyectoEntity) private gruposService: Repository<GruposProyectoEntity>) {}
+   constructor(
+      @InjectRepository(GruposProyectoEntity) private gruposService: Repository<GruposProyectoEntity>,
+      @InjectRepository(ArchivosProyectoEntity) private archivoService: Repository<ArchivosProyectoEntity>
+   ) {}
 
    crearGrupo(grupos: CreateGrupoProyectoDto): Promise<GruposProyectoEntity> {
       const newGrupo = this.gruposService.create(plainToClass(GruposProyectoEntity, grupos));
@@ -16,32 +20,45 @@ export class GrupoProyectoService {
 
    listarGrupos(): Promise<GruposProyectoEntity[]> {
       return this.gruposService.find({
-         relations: ["fichaGrupo", "fichaGrupo.programaFicha"]
+         relations: ["fichaGrupo"]
       })
    }
 
-   async actualizarGrupo(idGrupoProyecto: any, grupo: UpdateGrupoProyectoDto): Promise<GruposProyectoEntity> {
-      const searchGrupo = await this.gruposService.findOne({
+   actualizarGrupo(idGrupoProyecto: any, grupo: UpdateGrupoProyectoDto): Promise<GruposProyectoEntity> {
+      const searchGrupo = this.gruposService.findOne({
          where: {idGrupoProyecto}
       })
 
       if (!searchGrupo) {
          throw new Error("El grupo no existe");
       }
-         
-      const updateGrupo = this.gruposService.merge(searchGrupo, plainToClass(GruposProyectoEntity, grupo));
+      
+      const updateGrupo = this.gruposService.merge(plainToClass(GruposProyectoEntity, searchGrupo), plainToClass(GruposProyectoEntity, grupo));
       return this.gruposService.save(updateGrupo);
    }
 
    listarGrupo(idGrupoProyecto: any): Promise<GruposProyectoEntity> {
       const searchGrupo = this.gruposService.findOne({ 
          where: { idGrupoProyecto },
-         relations: ["fichaGrupo", "fichaGrupo.programaFicha"]
+         relations: ["fichaGrupo"]
        }, )
 
       if (!searchGrupo) {
          throw new Error("El grupo no existe");
       }
+
       return searchGrupo;
+   }
+
+   subirArchivo(archivo: CreateArchivoProyectoDto): Promise<ArchivosProyectoEntity> {
+      const newArchivo = this.archivoService.create(plainToClass(ArchivosProyectoEntity, archivo));
+      return this.archivoService.save(newArchivo)
+   }
+
+   listarArchivos(grupoArchivo: any): Promise<ArchivosProyectoEntity[]> {
+      return this.archivoService.find({
+         where: grupoArchivo,
+         relations: ["usuarioArchivo", "competenciaArchivo", "resultadoArchivo", "grupoArchivo"]
+      })
    }
 }

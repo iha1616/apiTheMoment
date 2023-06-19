@@ -13,6 +13,7 @@ export class crearObservacionAprendizDto {
     @IsNotEmpty()
     @ApiProperty()
     aprendizObservacion: number;
+    
     @IsNotEmpty()
     @ApiProperty()
     usuarioObservacion: number;
@@ -20,19 +21,6 @@ export class crearObservacionAprendizDto {
     @IsNotEmpty()
     @ApiProperty()
     decisionObservacion:number;
-
-    @IsNotEmpty()
-    @ApiProperty()
-    motivoObservacion: number;
-    @IsNotEmpty()
-    @ApiProperty()
-    descripcionMotivo: string;
-
 }
 
-export class actualizarObservacionAprendizDto extends PartialType(crearObservacionAprendizDto){
-    
-    @ApiProperty()
-    descripcionMotivo?: string;
-    
-}
+export class actualizarObservacionAprendizDto extends PartialType(crearObservacionAprendizDto) {}
