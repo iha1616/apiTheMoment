@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, OneToMany, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, OneToMany, JoinColumn, ManyToOne } from 'typeorm';
 import { FichasEntity, UsuariosEntity } from '..';
 
 @Entity('ficha_usuarios')
@@ -7,11 +7,11 @@ export class FichaUsuariosEntity {
    idFichaUsuario: number;
 
    //======== Claves foráneas de otras tablas ========
-   @OneToMany(() => UsuariosEntity, (usuario) => usuario.fichaUsuario)
+   @ManyToOne(() => UsuariosEntity, (usuario) => usuario.fichaUsuario, { nullable: false, onUpdate: "CASCADE", onDelete: "CASCADE" })
    @JoinColumn({ name: "idUsuario" })
    usuario: UsuariosEntity;
 
-   @OneToMany(() => FichasEntity, (fichas) => fichas.usuarioFicha)
+   @ManyToOne(() => FichasEntity, (fichas) => fichas.usuarioFicha , { nullable: false, onUpdate: "CASCADE", onDelete: "CASCADE" })
    @JoinColumn({ name: "idFicha" })
    ficha: FichasEntity;
 }
