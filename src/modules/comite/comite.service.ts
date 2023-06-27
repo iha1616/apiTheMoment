@@ -16,6 +16,7 @@ export class ComiteService {
 
    listarComites(): Promise<ComiteEntity[]> {
       return this.comiteService.find({
+         relations: ["pcaComite"]
          // relations: ["pcaComite", "pcaComite.programaFormativo", "pcaComite.usuario"]
       })
    }
