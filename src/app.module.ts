@@ -1,44 +1,26 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { RolesEntity } from './db/entitites/roles_permisos/roles.entity';
-import { PermisosEntity } from './db/entitites/roles_permisos/permisos.entity';
-import { RolesPermisosEntity } from './db/entitites/roles_permisos/roles_permisos.entity';
-import { UsuariosEntity } from './db/entitites/usuarios/usuarios.entity';
-import { TipoDocumentoEntity } from './db/entitites/usuarios/tipo_documento.entity';
-import { AprendicesEntity } from './db/entitites/usuarios/aprendices.entity';
-import { ProgramasFormativosEntity } from './db/entitites/area_formativa/programas_formativos.entity';
-import { CompetenciaEntity } from './db/entitites/area_formativa/competencias.entity';
-import { ResultadoAprendizajeEntity } from './db/entitites/area_formativa/resultado_aprendizaje.entity';
-import { FichasEntity } from './db/entitites/area_formativa/ficha.entity';
-import { PCAEntity } from './db/entitites/area_formativa/programa_coordinacion_academica.entity';
-import { ComiteEntity } from './db/entitites/comite/comite.entity';
-import { EntregaFichaEntity } from './db/entitites/entrega_ficha/entrega_ficha.entity';
-import { ObservacionesAprendizEntity } from './db/entitites/entrega_ficha/observaciones_aprendiz.entity';
-import { PlanMejoramientoEntity } from './db/entitites/plan_mejoramiento/plan_mejoramiento.entity';
-import { EstadoQuejasEntity } from './db/entitites/quejas/estados_quejas.entity';
-import { QuejasComiteEntity } from './db/entitites/quejas/quejas_comite.entity';
-import { ArchivosProyectoEntity } from './db/entitites/spf/spf_archivos_proyecto.entity';
-import { GruposProyectoEntity } from './db/entitites/spf/spf_grupos_proyecto.entity';
-import { TipoArchivoEntity } from './db/entitites/spf/spf_tipo_archivo.entity';
-import { EstadoDecisionEntity } from './db/entitites/utilitis/estado_decision.entity';
-import { MotivosComiteEntity } from './db/entitites/utilitis/motivos_comite.entity';
-
-const allEntities = [RolesEntity, PermisosEntity, RolesPermisosEntity, TipoDocumentoEntity, UsuariosEntity, AprendicesEntity, ProgramasFormativosEntity, CompetenciaEntity, ResultadoAprendizajeEntity, FichasEntity, PCAEntity, ComiteEntity, EntregaFichaEntity, ObservacionesAprendizEntity, PlanMejoramientoEntity, EstadoQuejasEntity, QuejasComiteEntity, ArchivosProyectoEntity, GruposProyectoEntity, TipoArchivoEntity, EstadoDecisionEntity, MotivosComiteEntity]
+import { ConfigModule } from '@nestjs/config';
+import config from './config';
+import { DatabaseModule } from './db/database.module';
+import { UsuariosModule } from './modules/usuarios/usuarios.module';
+import { TipoDocumentoModule } from './modules/tipo-documento/tipo-documento.module';
+import { RolesModule } from './modules/roles/roles.module';
+import { PermisosModule } from './modules/permisos/permisos.module';
+import { RolesPermisoModule } from './modules/roles_permiso/roles_permiso.module';
+import { AprendicesModule } from './modules/aprendices/aprendices.module';
+import { AccesoModule } from './modules/acceso/acceso.module';
+import { FichasModule } from './modules/fichas/fichas.module';
+import { ProgramasFormativosModule } from './modules/programas_formativos/programas_formativos.module';
+import { CompetenciasModule } from './modules/competencias/competencias.module';
+import { ResultadoAprendizajeModule } from './modules/resultado_aprendizaje/resultado_aprendizaje.module';
+import { ProgramaCoordinacionModule } from './modules/programa_coordinacion/programa_coordinacion.module';
+import { FichaUsuarioModule } from './modules/ficha-usuario/ficha-usuario.module';
 
 @Module({
-   imports: [TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '',
-      database: 'senastion_2',
-      entities: [...allEntities],
-      // autoLoadEntities: true,
-      synchronize: true,
-      // logging: true
-   })],
-   controllers: [],
-   providers: [],
+  imports: [ConfigModule.forRoot({
+   isGlobal: true,
+   load: [config],
+   envFilePath: ".env",
+  }), DatabaseModule, UsuariosModule, TipoDocumentoModule, RolesModule, PermisosModule, RolesPermisoModule, AprendicesModule, AccesoModule, FichasModule, ProgramasFormativosModule, CompetenciasModule, ResultadoAprendizajeModule, ProgramaCoordinacionModule, FichaUsuarioModule],
 })
-export class AppModule { }
+export class AppModule {}
