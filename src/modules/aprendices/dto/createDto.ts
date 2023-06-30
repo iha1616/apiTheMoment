@@ -45,17 +45,17 @@ export class DtoAprendiz{
     @ApiProperty()
     rolAprendiz: number;
 
-    // @IsNotEmpty()
-    // @ApiProperty()
-    // fichaAprendiz: number;
+    @IsNotEmpty()
+    @ApiProperty()
+    fichaAprendiz: number;
 
     // @IsNotEmpty()
     // @ApiProperty()
     // grupoAprendiz: number;
 
-    @IsNotEmpty()
+   //  @IsNotEmpty()
     @ApiProperty()
-    accesoAprendiz: number;
+    accesoAprendiz?: number;
 }
 
 export class UpdateAprendicesDto extends PartialType(DtoAprendiz) {}

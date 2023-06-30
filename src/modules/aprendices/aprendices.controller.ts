@@ -27,4 +27,9 @@ export class AprendicesController {
       return this.aprendicesService.updateAprendiz(id, aprendiz)
 
     }
+
+    @Get('af/:ficha')
+    async getAprendicesFicha(@Param("ficha", ParseIntPipe) ficha) {
+      return await this.aprendicesService.getAprendicesFicha(ficha)
+    }
 }

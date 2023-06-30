@@ -7,10 +7,10 @@ export class CreateDtoFichas{
     @ApiProperty()
     codigoFicha: number;
 
-    @IsNotEmpty()
-     @IsString()
-     @ApiProperty()
-    voceroFicha: string;
+   //  @IsNotEmpty()
+   //   @IsString()
+   //   @ApiProperty()
+   //  voceroFicha: string;
     
     @IsNotEmpty()
     @ApiProperty()

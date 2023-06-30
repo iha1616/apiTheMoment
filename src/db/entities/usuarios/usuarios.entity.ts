@@ -21,9 +21,6 @@ export class UsuariosEntity {
    @Column({ type: "bigint" })
    telefono: number;
 
-   @Column()
-   password: string;
-
    //======== Claves foráneas de otras tablas ========
    @ManyToOne(() => TipoDocumentoEntity, (tipoDocumento) => tipoDocumento.usuariosTipoDocumento, { nullable: false, onUpdate: "CASCADE", onDelete: "CASCADE" })
    @JoinColumn({ name: "idTipoDocumento" })

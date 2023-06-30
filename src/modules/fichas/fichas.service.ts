@@ -44,13 +44,10 @@ export class FichasService {
             relations : ['programaFicha', 'usuarioFichaDirector']
         });
     }
-    async getFicha(id: number){
+    async getFicha(idFicha: any){
 
         const fichaFound = await this.FichaRepository.findOne({
-            where:{
-                idFicha : id
-                
-            },
+            where:{ idFicha },
             relations : ['programaFicha', 'usuarioFichaDirector']
         });
 

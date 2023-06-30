@@ -21,9 +21,6 @@ export class AprendicesEntity {
    @Column({ type: "bigint" })
    telefono: number;
 
-   @Column()
-   password: string;
-
    @Column({ default: true })
    estadoAprendiz: boolean;
 
