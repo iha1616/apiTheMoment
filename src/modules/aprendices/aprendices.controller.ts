@@ -28,8 +28,8 @@ export class AprendicesController {
 
     }
 
-    @Get('af/:ficha')
-    async getAprendicesFicha(@Param("ficha", ParseIntPipe) ficha) {
+    @Get('ficha/:ficha')
+    async getAprendicesFicha(@Param("ficha", ParseIntPipe) ficha: number) {
       return await this.aprendicesService.getAprendicesFicha(ficha)
     }
 }

@@ -16,12 +16,22 @@ export class QuejasService {
 
    getAllQuejas() {
       return this.quejaRepository.find({
-         relations: ["aprendizQueja", "usuarioQueja", "motivoQueja", "estadoQueja", "comiteQueja", "decisionQueja"]
+         relations: ["aprendizQueja", "usuarioQueja", "motivoQueja", "estadoQueja", "comiteQueja", "decisionQueja", "competenciaQueja", "resultadoAQueja"]
+      })
+   }
+
+   getQuejaInstructor(id: any): Promise<QuejasComiteEntity[]> {
+      return this.quejaRepository.find({
+         where: { usuarioQueja: { idUsuario: id } },
+         relations: ["aprendizQueja", "usuarioQueja", "motivoQueja", "estadoQueja", "comiteQueja", "decisionQueja", "competenciaQueja", "resultadoAQueja"]
       })
    }
 
    getOneQueja(id: number): Promise<QuejasComiteEntity> {
-      return this.quejaRepository.findOne({ where: { idQueja: id } });
+      return this.quejaRepository.findOne({ 
+         where: { idQueja: id },
+         relations: ["aprendizQueja", "usuarioQueja", "motivoQueja", "estadoQueja", "comiteQueja", "decisionQueja", "competenciaQueja", "resultadoAQueja"]
+      });
    }
 
    async updateQueja(idQueja: any, queja: UpdateQuejasDTO): Promise<QuejasComiteEntity> {

@@ -16,6 +16,12 @@ export class PlanMejoramientoController {
    getPlan(@Param('id', ParseIntPipe) id): Promise<PlanMejoramientoEntity[]>{
        return this.planMejoramientoService.getPlan(id);
    }
+   
+   @Get("aprendiz/:id")
+   async getPlanAprendiz(@Param("id", ParseIntPipe) id: number) {
+      return await this.planMejoramientoService.getPlanAprendiz(id);
+   }
+
     @Get(':id')
     getOnePlan(@Param('id')id:number): Promise<PlanMejoramientoEntity>{
         return this.planMejoramientoService.getOnePlan(id);

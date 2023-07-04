@@ -16,7 +16,7 @@ export class CreateComiteDto {
 
    @IsNotEmpty()
    @ApiProperty()
-   link: string;
+   link?: string;
 }
 
 export class UpdateComiteDto extends PartialType(CreateComiteDto) {

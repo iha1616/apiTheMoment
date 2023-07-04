@@ -27,11 +27,6 @@ export class createUsuarioDto {
      @IsNotEmpty()
      @ApiProperty()
      telefono: number;
-
-   //  @IsNotEmpty()
-    // @IsString()
-     //@ApiProperty()
-    // password: string;
           
      @IsNotEmpty()
      @ApiProperty()
@@ -44,8 +39,6 @@ export class createUsuarioDto {
      @IsNotEmpty()
      @ApiProperty()
      accesoUsuario: number
-
-
 }
 
 export class updateUsuarioDto extends PartialType(createUsuarioDto) {}

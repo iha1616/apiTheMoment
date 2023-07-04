@@ -4,6 +4,10 @@ import { IsNotEmpty } from "class-validator";
 export class CreateQuejasDTo {
    @IsNotEmpty()
    @ApiProperty()
+   trimestre: number;
+
+   @IsNotEmpty()
+   @ApiProperty()
    aprendizQueja: number;
 
    @IsNotEmpty()
@@ -23,9 +27,15 @@ export class CreateQuejasDTo {
    estadoQueja: number;
 
    @ApiProperty()
-   @IsNotEmpty()
-   archivoProyecto: string;
+   archivoQueja?: string;
 
+   @ApiProperty()
+   @IsNotEmpty()
+   competenciaQueja: number;
+
+   @ApiProperty()
+   @IsNotEmpty()
+   resultadoAQueja: number;
 }
 
 export class UpdateQuejasDTO extends PartialType(CreateQuejasDTo) {

@@ -1,5 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { ArchivosProyectoEntity, EntregaFichaEntity, ProgramasFormativosEntity, ResultadoAprendizajeEntity } from '..';
+import { ArchivosProyectoEntity, EntregaFichaEntity, ProgramasFormativosEntity, QuejasComiteEntity, ResultadoAprendizajeEntity } from '..';
 
 @Entity('competencias')
 export class CompetenciaEntity {
@@ -26,4 +26,7 @@ export class CompetenciaEntity {
 
    @OneToMany(() => ArchivosProyectoEntity, (archivosProyecto) => archivosProyecto.competenciaArchivo)
    archivoCompetencia: ArchivosProyectoEntity[];
+
+   @OneToMany(() => QuejasComiteEntity, (quejasComite) => quejasComite.competenciaQueja)
+   quejaCompetencia: QuejasComiteEntity[];
 }

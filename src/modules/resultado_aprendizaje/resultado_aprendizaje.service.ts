@@ -13,15 +13,15 @@ export class ResultadoAprendizajeService {
     ){}
 
     async createRA(ra: CreateRAdto){
-        const RAFound = await this.RArepository.findOne({
-            where:{
-                nombreRA : ra.nombreRA
-            }
-        })
+      //   const RAFound = await this.RArepository.findOne({
+      //       where:{
+      //           nombreRA : ra.nombreRA
+      //       }
+      //   })
 
-        if(RAFound){
-            return new HttpException('Resultado de aprendizaje ya registrado', 400)
-        }
+      //   if(RAFound){
+      //       return new HttpException('Resultado de aprendizaje ya registrado', 400)
+      //   }
 
         const codigoFound =  await this.RArepository.findOne({
             where:{
@@ -48,6 +48,13 @@ export class ResultadoAprendizajeService {
         return this.RArepository.find({
             relations: ['competenciaResultado']
         })
+    }
+
+    getResultadosCompetencia(id: any): Promise<ResultadoAprendizajeEntity[]> {
+      return this.RArepository.find({
+         where: { competenciaResultado: { idCompetencia: id } },
+         relations: ["competenciaResultado"]
+      })
     }
 
     async getRA(id: number){

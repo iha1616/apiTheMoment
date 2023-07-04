@@ -51,11 +51,17 @@ export class CompetenciasService {
         })
     }
 
+    getCompetenciasPrograma(id: any): Promise<CompetenciaEntity[]> {
+      return this.CompeRepository.find({
+         where: { programasCompetencia: { idProgramaFormativo: id } },
+         relations: ["programasCompetencia"]
+      })
+    }
+
     async getCompetencia(id: number){
         const CompeFound = await this.CompeRepository.findOne({
             where:{
                 idCompetencia : id
-                
             },
             relations : ['programasCompetencia']
         });

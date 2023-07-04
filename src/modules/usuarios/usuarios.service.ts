@@ -61,18 +61,17 @@ export class UsuariosService {
 
     getUsuarios(){
         return this.UsuariosRepository.find({
-            relations : ['tipoDocumentoUsuario', 'rolUsuario']
+            relations : ['tipoDocumentoUsuario', 'rolUsuario', 'accesoUsuario']
         });
     }
 
-    async getUsuario(id: number){
+    async getUsuario(id: any){
 
         const usuarioFound = await this.UsuariosRepository.findOne({
             where:{
                 idUsuario : id
-                
             },
-            relations : ['tipoDocumentoUsuario', 'rolUsuario']
+            relations : ['tipoDocumentoUsuario', 'rolUsuario', 'accesoUsuario']
         });
 
         if(!usuarioFound){
@@ -95,7 +94,12 @@ export class UsuariosService {
      }
 
 
-
+     getUsuariosRol(id: any): Promise<UsuariosEntity[]> {
+      return this.UsuariosRepository.find({
+         where: { rolUsuario: { idRol: id } },
+         relations : ['tipoDocumentoUsuario', 'rolUsuario', 'accesoUsuario']
+      })
+     }
 
 
 

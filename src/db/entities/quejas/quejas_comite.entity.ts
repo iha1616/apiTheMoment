@@ -1,13 +1,16 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { AprendicesEntity, ComiteEntity, DecisionesComiteEntity, EstadoQuejasEntity, MotivosComiteEntity, PlanMejoramientoEntity, UsuariosEntity } from '..';
+import { AprendicesEntity, ComiteEntity, CompetenciaEntity, DecisionesComiteEntity, EstadoQuejasEntity, MotivosComiteEntity, PlanMejoramientoEntity, ResultadoAprendizajeEntity, UsuariosEntity } from '..';
 
 @Entity('quejas_comite')
 export class QuejasComiteEntity {
    @PrimaryGeneratedColumn()
    idQueja: number;
 
-   @Column({ type: "blob" })
+   @Column({ type: "blob", nullable: true })
    archivoQueja: string;
+
+   @Column()
+   trimestre: number;
    
    //======== Claves foráneas de otras tablas ========
    @ManyToOne(() => AprendicesEntity, (aprendices) => aprendices.quejasAprendices, { nullable: false, onUpdate: "CASCADE", onDelete: "CASCADE" })
@@ -45,6 +48,14 @@ export class QuejasComiteEntity {
 
    @Column({ nullable: true })
    otrosInstructores: string;
+
+   @ManyToOne(() => CompetenciaEntity, (competencia) => competencia.quejaCompetencia, { nullable: false, onUpdate: "CASCADE", onDelete: "CASCADE" })
+   @JoinColumn({ name: "idCompetencia" })
+   competenciaQueja: CompetenciaEntity;
+
+   @ManyToOne(() => ResultadoAprendizajeEntity, (resultadoAprendizaje) => resultadoAprendizaje.quejaResultadoA, { nullable: false, onUpdate: "CASCADE", onDelete: "CASCADE" })
+   @JoinColumn({ name: "idResultadoAprendizaje" })
+   resultadoAQueja: ResultadoAprendizajeEntity;
 
    //======== Claves foráneas para otras tablas ========
    @OneToMany(() => PlanMejoramientoEntity, (planMejoramiento) => planMejoramiento.quejaPlanMejoramiento)

@@ -23,9 +23,9 @@ export class ObservacionesAprendizService {
    //      })
    //  }
 
-   getAllobservacionAprendiz(aprendizObservacion) {
+   getAllobservacionAprendiz(aprendizObservacion: any) {
       return this.observacionesService.find({
-         where: aprendizObservacion,
+         where: { aprendizObservacion: { idAprendiz: aprendizObservacion }},
          relations: ["aprendizObservacion", "usuarioObservacion", "decisionObservacion"]
       })
    }

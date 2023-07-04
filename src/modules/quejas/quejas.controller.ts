@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Body, Param, ParseIntPipe } from '@nestjs/common';
 import { CreateQuejasDTo } from './dto/quejas.dto';
 import { QuejasService } from './quejas.service';
 import { QuejasComiteEntity } from 'src/db/entities/quejas/quejas_comite.entity'; 
@@ -24,7 +24,12 @@ export class QuejasController {
     }
 
     @Put(':id')
-    updateQuejas(@Body() queja: UpdateQuejasDTO, @Param('id')id:number) {
+    updateQuejas(@Body() queja: UpdateQuejasDTO, @Param('id') id: number) {
        return this.quejasService.updateQueja(id, queja);   
+   }
+
+   @Get('instructor/:id')
+   async getQuejaInstructor(@Param("id", ParseIntPipe) id: number) {
+      return this.quejasService.getQuejaInstructor(id);
    }
 }

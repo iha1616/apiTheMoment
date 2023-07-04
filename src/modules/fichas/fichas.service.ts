@@ -47,7 +47,7 @@ export class FichasService {
     async getFicha(idFicha: any){
 
         const fichaFound = await this.FichaRepository.findOne({
-            where:{ idFicha },
+            where:{ codigoFicha: idFicha },
             relations : ['programaFicha', 'usuarioFichaDirector']
         });
 

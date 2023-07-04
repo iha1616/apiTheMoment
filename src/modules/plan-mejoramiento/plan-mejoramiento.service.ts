@@ -20,10 +20,18 @@ export class PlanMejoramientoService {
    //  } 
    getPlan(usuarioPlanMejoramiento: any) {
       return this.planMejoramientoRepository.find({
-         where: usuarioPlanMejoramiento,
+         where: { usuarioPlanMejoramiento: { idUsuario: usuarioPlanMejoramiento } },
          relations: ["quejaPlanMejoramiento", "usuarioPlanMejoramiento", "aprendizPlanMejoramiento", "decisionPlanMejoramiento", "motivoPlanMejoramiento"]
       })
    }
+
+   getPlanAprendiz(id: any): Promise<PlanMejoramientoEntity[]> {
+      return this.planMejoramientoRepository.find({
+         where: { aprendizPlanMejoramiento: { idAprendiz: id } },
+         relations: ["quejaPlanMejoramiento", "usuarioPlanMejoramiento", "aprendizPlanMejoramiento", "decisionPlanMejoramiento", "motivoPlanMejoramiento"]
+      })
+   }
+
    getOnePlan(id: number) {
       return this.planMejoramientoRepository.findOne({ where: { idPlanMejoramiento: id } })
    }

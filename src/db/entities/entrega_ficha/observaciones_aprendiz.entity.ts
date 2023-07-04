@@ -1,5 +1,5 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { AprendicesEntity, EstadoDecisionEntity, UsuariosEntity } from '..';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { AprendicesEntity, EstadoDecisionEntity, QuejasComiteEntity, UsuariosEntity } from '..';
 
 @Entity('observaciones_aprendiz')
 export class ObservacionesAprendizEntity {
@@ -27,4 +27,6 @@ export class ObservacionesAprendizEntity {
    @ManyToOne(() => EstadoDecisionEntity, (estadoDecision) => estadoDecision.observacionesDecision, { nullable: false, onUpdate: "CASCADE", onDelete: "CASCADE" })
    @JoinColumn({ name: "idEstadoDecision" })
    decisionObservacion: EstadoDecisionEntity;
+
+   //======== Claves foráneas para otras tablas ========
 }

@@ -27,4 +27,9 @@ export class ResultadoAprendizajeController {
       return this.raService.updateRA(id, ra)
 
     }
+
+    @Get('competencia/:id')
+    async getResultadosCompetencia(@Param("id", ParseIntPipe) id: number) {
+      return await this.raService.getResultadosCompetencia(id)
+    }
 }

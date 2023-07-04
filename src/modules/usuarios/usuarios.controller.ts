@@ -30,7 +30,10 @@ export class UsuariosController {
     }
 
 
-
+    @Get("rol/:id")
+    async getUsuarioRol(@Param("id", ParseIntPipe) id: number) {
+      return await this.usuarioService.getUsuariosRol(id)
+    }
 
 
 }

@@ -97,7 +97,7 @@ export class AprendicesService {
 
    getAprendicesFicha(fichaAprendiz: any): Promise<AprendicesEntity[]> {
       return this.AprendizRepository.find({
-         where: { fichaAprendiz },
+         where: { fichaAprendiz: { codigoFicha: fichaAprendiz } },
          relations: ['tipoDocumentoAprendiz', 'rolAprendiz', 'fichaAprendiz', 'grupoAprendiz', 'accesoAprendiz']
       })
    }

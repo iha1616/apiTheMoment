@@ -28,15 +28,6 @@ export class DtoAprendiz{
     @ApiProperty()
     telefono: number;
 
-    // @IsNotEmpty()
-    // @IsString()
-    // @ApiProperty()
-    // password: string;
-
-    // @IsNotEmpty()
-    // @ApiProperty()
-    // estadoAprendiz: boolean;
-
     @IsNotEmpty()
     @ApiProperty()
     tipoDocumentoAprendiz: number;
@@ -48,10 +39,6 @@ export class DtoAprendiz{
     @IsNotEmpty()
     @ApiProperty()
     fichaAprendiz: number;
-
-    // @IsNotEmpty()
-    // @ApiProperty()
-    // grupoAprendiz: number;
 
    //  @IsNotEmpty()
     @ApiProperty()

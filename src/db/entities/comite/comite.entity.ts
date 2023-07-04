@@ -15,7 +15,7 @@ export class ComiteEntity {
    @Column({ default: false })
    estadoComite: boolean;
 
-   @Column()
+   @Column({ nullable: true })
    link: string;
 
    @Column({ type: "blob", nullable: true })

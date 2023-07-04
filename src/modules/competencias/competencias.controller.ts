@@ -27,4 +27,9 @@ export class CompetenciasController {
       return this.compeService.updateCompetencia(id, competencia)
 
     }
+
+    @Get('programa/:id')
+    async getCompetenciasPrograma(@Param("id", ParseIntPipe) id: number) {
+      return await this.compeService.getCompetenciasPrograma(id);
+    }
 }
