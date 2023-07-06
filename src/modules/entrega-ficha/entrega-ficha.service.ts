@@ -23,8 +23,8 @@ export class EntregaFichaService {
 
    async getEntregaFicha(fichaEntrega: any) {
       return await this.entregaFichaRepository.find({
-         where: { fichaEntrega: { idFicha: fichaEntrega }},
-         relations: ["usuarioEntregaFicha", "fichaEntrega", "competenciaEntregaFicha", "resultadoEntregaFicha"]
+         where: { fichaEntrega: { codigoFicha: fichaEntrega }},
+         relations: ["usuarioEntregaFicha", "fichaEntrega.programaFicha", "competenciaEntregaFicha", "resultadoEntregaFicha"]
       })
    }
 
@@ -33,7 +33,7 @@ export class EntregaFichaService {
          where: {
             idEntregaFicha
          },
-         relations: ["usuarioEntregaFicha", "fichaEntrega", "competenciaEntregaFicha", "resultadoEntregaFicha"]
+         relations: ["usuarioEntregaFicha", "fichaEntrega.programaFicha", "competenciaEntregaFicha", "resultadoEntregaFicha"]
       });
    }
 

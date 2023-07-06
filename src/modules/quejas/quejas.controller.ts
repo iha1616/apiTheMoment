@@ -19,7 +19,7 @@ export class QuejasController {
     }
     
     @Post()
-    createQueja( @Body() newQueja: CreateQuejasDTo): Promise<QuejasComiteEntity>{
+    createQueja(@Body() newQueja: CreateQuejasDTo): Promise<QuejasComiteEntity>{
         return this.quejasService.createQueja(newQueja);
     }
 

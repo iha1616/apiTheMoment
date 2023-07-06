@@ -61,7 +61,7 @@ export class AprendicesService {
 
    getAprendices() {
       return this.AprendizRepository.find({
-         relations: ['tipoDocumentoAprendiz', 'rolAprendiz', 'fichaAprendiz', 'grupoAprendiz', 'accesoAprendiz']
+         relations: ['tipoDocumentoAprendiz', 'rolAprendiz', 'fichaAprendiz.usuarioFichaDirector', 'fichaAprendiz.programaFicha', 'grupoAprendiz', 'accesoAprendiz']
       })
    }
 
@@ -71,7 +71,7 @@ export class AprendicesService {
             idAprendiz: id
 
          },
-         relations: ['tipoDocumentoAprendiz', 'rolAprendiz', 'fichaAprendiz', 'grupoAprendiz', 'accesoAprendiz']
+         relations: ['tipoDocumentoAprendiz', 'rolAprendiz', 'fichaAprendiz.usuarioFichaDirector', 'fichaAprendiz.programaFicha', 'grupoAprendiz', 'accesoAprendiz']
       });
 
       if (!aprendizFound) {
@@ -98,7 +98,7 @@ export class AprendicesService {
    getAprendicesFicha(fichaAprendiz: any): Promise<AprendicesEntity[]> {
       return this.AprendizRepository.find({
          where: { fichaAprendiz: { codigoFicha: fichaAprendiz } },
-         relations: ['tipoDocumentoAprendiz', 'rolAprendiz', 'fichaAprendiz', 'grupoAprendiz', 'accesoAprendiz']
+         relations: ['tipoDocumentoAprendiz', 'rolAprendiz', 'fichaAprendiz.usuarioFichaDirector', 'fichaAprendiz.programaFicha', 'grupoAprendiz', 'accesoAprendiz']
       })
    }
 }

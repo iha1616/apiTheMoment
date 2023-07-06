@@ -66,8 +66,8 @@ export class AccesoService {
     }
 
 
-    getAccesos() {
-        return this.AccesoRepository.find()
+    async getAccesos() {
+        return await this.AccesoRepository.find()
     }
 
     async getAcceso(id: number) {

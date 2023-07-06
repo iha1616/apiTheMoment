@@ -21,6 +21,14 @@ export class crearObservacionAprendizDto {
     @IsNotEmpty()
     @ApiProperty()
     decisionObservacion:number;
+
+    @IsNotEmpty()
+    @ApiProperty()
+    competenciaObservacion: number;
+
+    @IsNotEmpty()
+    @ApiProperty()
+    resultadoAObservacion: number;
 }
 
 export class actualizarObservacionAprendizDto extends PartialType(crearObservacionAprendizDto) {}
