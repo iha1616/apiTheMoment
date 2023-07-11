@@ -23,8 +23,8 @@ export class QuejasController {
         return this.quejasService.createQueja(newQueja);
     }
 
-    @Put(':id')
-    updateQuejas(@Body() queja: UpdateQuejasDTO, @Param('id') id: number) {
+    @Post(':id')
+    updateQuejas(@Param('id', ParseIntPipe) id: number, @Body() queja: UpdateQuejasDTO) {
        return this.quejasService.updateQueja(id, queja);   
    }
 

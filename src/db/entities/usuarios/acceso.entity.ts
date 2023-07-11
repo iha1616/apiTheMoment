@@ -7,7 +7,7 @@ export class AccesoEntity {
    @PrimaryGeneratedColumn()
    idAcceso: number;
 
-   @Column()
+   @Column({ type: "bigint" })
    documento: number;
 
    @Column()

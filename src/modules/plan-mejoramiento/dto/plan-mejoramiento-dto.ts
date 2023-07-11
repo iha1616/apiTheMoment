@@ -13,22 +13,23 @@ export class CreatePlanMejoramientoDto {
     @IsNotEmpty()
     @ApiProperty()
     aprendizPlanMejoramiento:number;
+    
+    @IsNotEmpty()
+    @ApiProperty()
+    archivoPlanMejoramiento?: string;
+    
+    @IsNotEmpty()
+    @ApiProperty()
+    decisionPlanMejoramiento?:number;
+    
+    @IsNotEmpty()
+    @ApiProperty()
+    motivoPlanMejoramiento?:number;
+    
+    @IsNotEmpty()
+    @ApiProperty()
+    descripcionMotivo?: string;
 }
 
 export class UpdatePlanMejoramientoDTO extends PartialType(CreatePlanMejoramientoDto){
-   @IsNotEmpty()
-   @ApiProperty()
-   archivoPlanMejoramiento?: string;
-
-   @IsNotEmpty()
-   @ApiProperty()
-   decisionPlanMejoramiento?:number;
-
-   @IsNotEmpty()
-   @ApiProperty()
-   motivoPlanMejoramiento?:number;
-
-   @IsNotEmpty()
-   @ApiProperty()
-   descripcionMotivo?: string;
 }

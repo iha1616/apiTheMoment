@@ -25,30 +25,40 @@ export class FichaUsuarioService {
         if(!UsuaFound){
             return new HttpException('Usuario no encontrado', 400)
         }
-        const newFichaUsua = this.FUrepository.create(plainToClass(FichaUsuariosEntity, fichaUsua))
-        return this.FUrepository.save(newFichaUsua);
 
+        var validateExist = await this.getFichaUsuas()
+        
+      //   console.log("a1")
+        validateExist.map((i) => {
+            if (i.usuario.idUsuario == fichaUsua.usuario && i.ficha.idFicha == fichaUsua.ficha) {
+               return validateExist = null
+               // console.log("aaa")
+            }
+        })
+        if (validateExist != null) {
+         //   console.log("b1")
+           const newFichaUsua = this.FUrepository.create(plainToClass(FichaUsuariosEntity, fichaUsua))
+           return this.FUrepository.save(newFichaUsua);
+        }
+        return new HttpException('Ya está asignado a la ficha', 400)
     }
 
 
-    getFichaUsuas(){
+    getFichaUsuas(): Promise<FichaUsuariosEntity[]>{
         return this.FUrepository.find({
             relations: ['ficha', 'usuario']
         })
     }
 
-    async getFichaUsua(id: number){
-        const FichaUFound = await this.FUrepository.findOne({
-            where:{
-                idFichaUsuario : id
-                
-            },
-            relations : ['ficha', 'usuario']
+    async getFichaUsua(id: number): Promise<FichaUsuariosEntity[]> {
+        const FichaUFound = await this.FUrepository.find({
+            where:{ usuario: { idUsuario: id } },
+            relations : ['ficha.programaFicha', 'ficha.usuarioFichaDirector', 'usuario']
         });
 
-        if(!FichaUFound){
-            return new HttpException('Ficha-Usuario no encontrada', 404)
-        }
+      //   if(!FichaUFound){
+      //       return new HttpException('Ficha-Usuario no encontrada', 404)
+      //   }
         return FichaUFound;
 
     }

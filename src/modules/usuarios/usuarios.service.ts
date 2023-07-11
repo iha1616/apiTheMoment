@@ -69,7 +69,7 @@ export class UsuariosService {
 
         const usuarioFound = await this.UsuariosRepository.findOne({
             where:{
-                idUsuario : id
+                accesoUsuario: { idAcceso: id }
             },
             relations : ['tipoDocumentoUsuario', 'rolUsuario', 'accesoUsuario']
         });

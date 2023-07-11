@@ -23,6 +23,13 @@ export class AccesoController {
         return this.accesoService.createAcceso(createAccesDto);
     }
 
+    @Post("loginValidate")
+    async loginValidate(@Body() data: CreateDtoAcceso) {
+      return await this.accesoService.loginValidate(data)
+    }
+
+    
+
 
     
     @Post('login')

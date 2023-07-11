@@ -13,8 +13,8 @@ export class PlanMejoramientoController {
    //      return this.planMejoramientoService.getPlan();
    //  }
    @Get()
-   getPlan(@Param('id', ParseIntPipe) id): Promise<PlanMejoramientoEntity[]>{
-       return this.planMejoramientoService.getPlan(id);
+   getPlan(): Promise<PlanMejoramientoEntity[]>{
+       return this.planMejoramientoService.getPlan();
    }
    
    @Get("aprendiz/:id")

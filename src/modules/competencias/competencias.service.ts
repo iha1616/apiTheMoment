@@ -14,15 +14,15 @@ export class CompetenciasService {
     ){}
 
     async createCompetencia(competencia: CreateCompeDto){
-        const CompetenciaFound = await this.CompeRepository.findOne({
-            where:{
-                nombreCompetencia : competencia.nombreCompetencia
-            }
-        })
+      //   const CompetenciaFound = await this.CompeRepository.findOne({
+      //       where:{
+      //           nombreCompetencia : competencia.nombreCompetencia
+      //       }
+      //   })
 
-        if(CompetenciaFound){
-            return new HttpException('Competencia ya registrada', 400)
-        }
+      //   if(CompetenciaFound){
+      //       return new HttpException('Competencia ya registrada', 400)
+      //   }
 
         const codigoFound =  await this.CompeRepository.findOne({
             where:{

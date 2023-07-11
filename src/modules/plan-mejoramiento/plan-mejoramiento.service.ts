@@ -13,17 +13,17 @@ export class PlanMejoramientoService {
       const newPlan = this.planMejoramientoRepository.create(plainToClass(PlanMejoramientoEntity, plan))
       return this.planMejoramientoRepository.save(newPlan)
    }
-   //  getPlan(){
-   //      return this.planMejoramientoRepository.find({
-   //          relations:["quejaPlanMejoramiento","usuarioPlanMejoramiento","aprendizPlanMejoramiento","decisionPlanMejoramiento","motivoPlanMejoramiento"]
-   //      })
-   //  } 
-   getPlan(usuarioPlanMejoramiento: any) {
-      return this.planMejoramientoRepository.find({
-         where: { usuarioPlanMejoramiento: { idUsuario: usuarioPlanMejoramiento } },
-         relations: ["quejaPlanMejoramiento", "usuarioPlanMejoramiento", "aprendizPlanMejoramiento", "decisionPlanMejoramiento", "motivoPlanMejoramiento"]
-      })
-   }
+    getPlan(){
+        return this.planMejoramientoRepository.find({
+            relations: ["quejaPlanMejoramiento.competenciaQueja", "quejaPlanMejoramiento.resultadoAQueja", "usuarioPlanMejoramiento", "aprendizPlanMejoramiento.fichaAprendiz", "decisionPlanMejoramiento", "motivoPlanMejoramiento"]
+        })
+    } 
+   // getPlan(usuarioPlanMejoramiento: any) {
+   //    return this.planMejoramientoRepository.find({
+   //       where: { usuarioPlanMejoramiento: { idUsuario: usuarioPlanMejoramiento } },
+   //       relations: ["quejaPlanMejoramiento", "usuarioPlanMejoramiento", "aprendizPlanMejoramiento", "decisionPlanMejoramiento", "motivoPlanMejoramiento"]
+   //    })
+   // }
 
    getPlanAprendiz(id: any): Promise<PlanMejoramientoEntity[]> {
       return this.planMejoramientoRepository.find({
