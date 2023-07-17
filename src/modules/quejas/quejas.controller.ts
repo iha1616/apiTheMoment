@@ -18,6 +18,11 @@ export class QuejasController {
         return this.quejasService.getOneQueja(id);
     }
     
+    @Get('comite/:id')
+    getQuejaComite(@Param('id') id: number): Promise<QuejasComiteEntity[]>{
+        return this.quejasService.getQuejaComite(id);
+    }
+    
     @Post()
     createQueja(@Body() newQueja: CreateQuejasDTo): Promise<QuejasComiteEntity>{
         return this.quejasService.createQueja(newQueja);

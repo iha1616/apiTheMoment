@@ -20,7 +20,14 @@ export class GrupoProyectoService {
 
    listarGrupos(): Promise<GruposProyectoEntity[]> {
       return this.gruposService.find({
-         relations: ["fichaGrupo"]
+         relations: ["fichaGrupo.programaFicha", "fichaGrupo.usuarioFichaDirector"]
+      })
+   }
+
+   listarGruposFicha(ficha: any): Promise<GruposProyectoEntity[]> {
+      return this.gruposService.find({
+         where: { fichaGrupo: { codigoFicha: ficha } },
+         relations: ["fichaGrupo.programaFicha", "fichaGrupo.usuarioFichaDirector"]
       })
    }
 
@@ -40,7 +47,7 @@ export class GrupoProyectoService {
    listarGrupo(idGrupoProyecto: any): Promise<GruposProyectoEntity> {
       const searchGrupo = this.gruposService.findOne({ 
          where: { idGrupoProyecto },
-         relations: ["fichaGrupo"]
+         relations: ["fichaGrupo.programaFicha", "fichaGrupo.usuarioFichaDirector"]
        }, )
 
       if (!searchGrupo) {

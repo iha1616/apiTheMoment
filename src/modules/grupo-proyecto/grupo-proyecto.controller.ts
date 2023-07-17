@@ -21,6 +21,12 @@ export class GrupoProyectoController {
       return await this.grupoService.listarGrupos();
    }
 
+   // http://localhost:3000/api/grupo-proyecto/ficha/:id
+   @Get("ficha/:id")
+   async listarGruposFicha(@Param("id", ParseIntPipe) id: number) {
+      return await this.grupoService.listarGruposFicha(id);
+   }
+
    // http://localhost:3000/api/grupo-proyecto/:id
    @Post(":id")
    async actualizarGrupo(@Param('id', ParseIntPipe) id, @Body() grupoActualizar) {

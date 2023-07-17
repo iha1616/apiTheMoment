@@ -22,13 +22,13 @@ export class ComiteController {
 
    // http://localhost:3000/api/comite/:id
    @Get(":id")
-   async mostrarComite(@Param('id', ParseIntPipe) id) {
+   async mostrarComite(@Param('id', ParseIntPipe) id: number) {
       return await this.comiteService.mostrarComite(id);
    }
 
    // http://localhost:3000/api/comite/:id
    @Post(":id")
-   async actualizarComite(@Param('id', ParseIntPipe) id, @Body() comite: UpdateComiteDto) {
+   async actualizarComite(@Param('id', ParseIntPipe) id: number, @Body() comite: UpdateComiteDto) {
       return await this.comiteService.actualizarComite(id, comite);
    }
 }

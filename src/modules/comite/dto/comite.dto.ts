@@ -17,12 +17,16 @@ export class CreateComiteDto {
    @IsNotEmpty()
    @ApiProperty()
    link?: string;
+
+   @ApiProperty()
+   estadoComite?: boolean;
+   
+   @ApiProperty()
+   acta?: string;
+   
+   @ApiProperty()
+   resolucion?: string;
 }
 
 export class UpdateComiteDto extends PartialType(CreateComiteDto) {
-   @ApiProperty()
-   acta?: string;
-
-   @ApiProperty()
-   resolucion?: string;
 }

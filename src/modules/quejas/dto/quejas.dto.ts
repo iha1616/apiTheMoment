@@ -24,7 +24,7 @@ export class CreateQuejasDTo {
 
    @IsNotEmpty()
    @ApiProperty()
-   estadoQueja: number;
+   estadoQueja?: number;
 
    @ApiProperty()
    archivoQueja?: string;
@@ -39,20 +39,21 @@ export class CreateQuejasDTo {
    
    @ApiProperty()
    comiteQueja?: number;
+
+   @ApiProperty()
+   decisionQueja?: number;
+   
+   @ApiProperty()
+   otraDecision?: string;
+   
+   @ApiProperty()
+   asisteComite?: number;
+   
+   @ApiProperty()
+   otrosInstructores?: string;
 }
 
 export class UpdateQuejasDTO extends PartialType(CreateQuejasDTo) {
 
 
-   @ApiProperty()
-   decisionQueja?: number;
-
-   @ApiProperty()
-   otraDecision?: string;
-
-   @ApiProperty()
-   asisteComite?: number;
-
-   @ApiProperty()
-   otrosInstructores?: string;
 }

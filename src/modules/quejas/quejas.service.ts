@@ -27,6 +27,13 @@ export class QuejasService {
       })
    }
 
+   getQuejaComite(id: any): Promise<QuejasComiteEntity[]> {
+      return this.quejaRepository.find({
+         where: { comiteQueja: { codigoComite: id } },
+         relations: ["aprendizQueja.fichaAprendiz", "usuarioQueja", "motivoQueja", "estadoQueja", "comiteQueja", "decisionQueja", "competenciaQueja.programasCompetencia", "resultadoAQueja"]
+      })
+   }
+
    getOneQueja(id: number): Promise<QuejasComiteEntity> {
       return this.quejaRepository.findOne({ 
          where: { idQueja: id },

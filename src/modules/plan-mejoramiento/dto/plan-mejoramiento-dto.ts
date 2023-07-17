@@ -14,19 +14,19 @@ export class CreatePlanMejoramientoDto {
     @ApiProperty()
     aprendizPlanMejoramiento:number;
     
-    @IsNotEmpty()
+   //  @IsNotEmpty()
     @ApiProperty()
     archivoPlanMejoramiento?: string;
     
-    @IsNotEmpty()
+   //  @IsNotEmpty()
     @ApiProperty()
     decisionPlanMejoramiento?:number;
     
-    @IsNotEmpty()
+   //  @IsNotEmpty()
     @ApiProperty()
     motivoPlanMejoramiento?:number;
     
-    @IsNotEmpty()
+   //  @IsNotEmpty()
     @ApiProperty()
     descripcionMotivo?: string;
 }

@@ -29,7 +29,9 @@ export class ComiteService {
    }
 
    actualizarComite(idComite: any, comite: UpdateComiteDto): Promise<ComiteEntity> {
-      const searchComite = this.comiteService.findOne(idComite);
+      const searchComite = this.comiteService.findOne({
+         where: { idComite }
+      });
 
       if (!searchComite) {
          throw new Error("No se encontró el comité");
