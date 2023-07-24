@@ -41,9 +41,10 @@ export class AprendicesEntity {
    @JoinColumn({ name: "idGrupoProyecto" })
    grupoAprendiz: GruposProyectoEntity;
 
-   @ManyToOne(() => AccesoEntity, (acceso) => acceso.aprendicesAcceso, { nullable: false, onUpdate: "CASCADE", onDelete: "CASCADE"})
-   @JoinColumn({ name: "idAcceso" })
-   accesoAprendiz: AccesoEntity;
+   // ! Sin uso se comentará
+   // @ManyToOne(() => AccesoEntity, (acceso) => acceso.aprendicesAcceso, { nullable: false, onUpdate: "CASCADE", onDelete: "CASCADE"})
+   // @JoinColumn({ name: "idAcceso" })
+   // accesoAprendiz: AccesoEntity;
 
    //======== Claves foráneas para otras tablas ========
    @OneToMany(() => ObservacionesAprendizEntity, (observacionesAprendiz) => observacionesAprendiz.aprendizObservacion)

@@ -49,14 +49,14 @@ export class UsuariosService {
 
         const newAcceso = await this.accesoService.createAcceso(plainToClass(AccesoEntity, createAccesso));
 
-        if (!(newAcceso instanceof AccesoEntity)) {
-            throw new HttpException('No se pudo crear el Usuario', 500);
-        }
+      //   if (!(newAcceso instanceof AccesoEntity)) {
+      //       throw new HttpException('No se pudo crear el Usuario', 500);
+      //   }
 
-        const newUsuario = plainToClass(UsuariosEntity, usuario);
-        newUsuario.accesoUsuario = newAcceso;
+      //   const newUsuario = plainToClass(UsuariosEntity, usuario);
+      //   newUsuario.accesoUsuario = newAcceso;
 
-        return this.UsuariosRepository.save(newUsuario);
+      //   return this.UsuariosRepository.save(newUsuario);
     }
 
     getUsuarios(){
@@ -67,30 +67,32 @@ export class UsuariosService {
 
     async getUsuario(id: any){
 
-        const usuarioFound = await this.UsuariosRepository.findOne({
-            where:{
-                accesoUsuario: { idAcceso: id }
-            },
-            relations : ['tipoDocumentoUsuario', 'rolUsuario', 'accesoUsuario']
-        });
+   //      const usuarioFound = await this.UsuariosRepository.findOne({
+   //          where:{
+   //              accesoUsuario: { idAcceso: id }
+   //          },
+   //          relations : ['tipoDocumentoUsuario', 'rolUsuario', 'accesoUsuario']
+   //      });
 
-        if(!usuarioFound){
-            return new HttpException('Usuario no encontrado', 404)
-        }
-        return usuarioFound;
-    }
+   //      if(!usuarioFound){
+   //          return new HttpException('Usuario no encontrado', 404)
+   //      }
+   //      return usuarioFound;
+   //  }
 
-     async updateUsuario(idUsuario: any, usuario: updateUsuarioDto){
-        const searchUsua = await this.UsuariosRepository.findOne({
-           where: { idUsuario }
-        })
+   //   async updateUsuario(idUsuario: any, usuario: updateUsuarioDto){
+   //      const searchUsua = await this.UsuariosRepository.findOne({
+   //         where: { idUsuario }
+   //      })
   
-        if (!searchUsua) {
-            return new HttpException('Usuario no encontrado', 404)
-        }
+   //      if (!searchUsua) {
+   //          return new HttpException('Usuario no encontrado', 404)
+   //      }
   
-        const updateUsua = this.UsuariosRepository.merge(searchUsua, plainToClass(UsuariosEntity, usuario));
-        return this.UsuariosRepository.save(updateUsua);
+   //      const updateUsua = this.UsuariosRepository.merge(searchUsua, plainToClass(UsuariosEntity, usuario));
+   //      return this.UsuariosRepository.save(updateUsua);
+
+   return null
      }
 
 

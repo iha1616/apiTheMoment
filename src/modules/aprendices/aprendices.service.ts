@@ -50,9 +50,9 @@ export class AprendicesService {
          password: aprendiz.documento
       }
       const newAcceso = await this.accesoService.createAcceso(plainToClass(AccesoEntity, createAccess))
-      if (!newAcceso) {
-         throw new Error("No se pudo crear el aprendiz");
-      }
+      // if (!newAcceso) {
+      //    throw new Error("No se pudo crear el aprendiz");
+      // }
       aprendiz.accesoAprendiz = newAcceso['idAcceso'];
       const newAprendiz = this.AprendizRepository.create(plainToClass(AprendicesEntity, aprendiz))
       return this.AprendizRepository.save(newAprendiz);

@@ -25,7 +25,7 @@ export class UsuariosController {
     }
     @Put(':id')
     updateUsuario(@Param('id', ParseIntPipe)id: number, @Body() user : updateUsuarioDto){
-      return this.usuarioService.updateUsuario(id, user)
+      // return this.usuarioService.updateUsuario(id, user)
 
     }
 

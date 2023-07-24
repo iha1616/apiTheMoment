@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { AprendicesEntity, UsuariosEntity } from '..';
+import { AccesoEntity, AprendicesEntity, UsuariosEntity } from '..';
 
 @Entity('tipo_documento')
 export class TipoDocumentoEntity {
@@ -15,4 +15,8 @@ export class TipoDocumentoEntity {
 
    @OneToMany(() => AprendicesEntity, (aprendices) => aprendices.tipoDocumentoAprendiz)
    aprendicesTipoDocumento: AprendicesEntity[];
-}
+
+   // !Campo modificado
+   @OneToMany(() => AccesoEntity, (acceso) => acceso.tipoDocumentoAcceso)
+   accesoTipoDocumento: AccesoEntity[];
+} 

@@ -8,10 +8,10 @@ import { JwtService } from '@nestjs/jwt';
 export class AccesoController {
     constructor(private accesoService: AccesoService, private jwtService : JwtService ){}
 
-    @Get()
-    getAccesos(): Promise<AccesoEntity[]>{
-        return this.accesoService.getAccesos();
-    }
+   //  @Get()
+   //  getAccesos(): Promise<AccesoEntity[]>{
+   //      return this.accesoService.getAccesos();
+   //  }
 
     @Get(':id')
     getAcceso(@Param('id',ParseIntPipe)id:number){
