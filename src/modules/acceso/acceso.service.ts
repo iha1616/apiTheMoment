@@ -1,119 +1,75 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { Injectable, HttpException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AccesoEntity } from 'src/db/entities';
+import { AccesoEntity, AprendicesEntity, UsuariosEntity } from 'src/db/entities';
 import { Repository } from 'typeorm';
-import { CreateDtoAcceso, updateDtoAcceso } from './dto/createDtoAcces';
+import { CreateDtoAcceso, LoginDTO, updateDtoAcceso } from './dto/createDtoAcces';
 import * as bcrypt from 'bcryptjs';
 import { plainToClass } from 'class-transformer';
+import * as jwt from 'jsonwebtoken';
+import { UsuariosService } from '../usuarios/usuarios.service';
 
 @Injectable()
 export class AccesoService {
-   constructor(@InjectRepository(AccesoEntity) private AccesoRepository: Repository<AccesoEntity>) { }
+   constructor(
+      @InjectRepository(AccesoEntity) private accesoService: Repository<AccesoEntity>,
+      @InjectRepository(UsuariosEntity) private usuarioService: Repository<UsuariosEntity>,
+      @InjectRepository(AprendicesEntity) private aprendizService: Repository<AprendicesEntity>,
+   ) { }
 
-   async createAcceso(acceso: CreateDtoAcceso) {
-      // try {
-      //    const accesoFound = await this.AccesoRepository.findOne({
-      //       where: {
-      //          documento: acceso.documento,
-      //       }
-      //    })
+   async createAcceso(acceso: CreateDtoAcceso): Promise<AccesoEntity> {
+      const saltRounds = 10
 
-      //    if (accesoFound) {
-      //       return new HttpException('Documento ya esta registrado', 400)
-      //    }
-
-      //    // console.log(accesoFound)
-
-      //    const hashedPassword = await bcrypt.hashSync(acceso.password, 10);
-      //    // Guardar la contraseña encriptada en la base de datos
-      //    acceso.password = hashedPassword;
-
-      //    // const salt = bcrypt.genSaltSync() 
-      //    // acceso.password = bcrypt.hashSync(acceso.password, salt)
-
-      //    const newAcceso = this.AccesoRepository.create(plainToClass(AccesoEntity, acceso))
-      //    return this.AccesoRepository.save(newAcceso);
-      // } catch (error) {
-      //    console.log(error);
-      //    return new HttpException('Error interno', 500);
-      // }
+      acceso.password = await bcrypt.hash(acceso.password, saltRounds);
+      const create = this.accesoService.create(plainToClass(AccesoEntity, acceso));
+      return this.accesoService.save(create);
    }
 
-
-   async findByDocumentoAndContraseña(documento: number, password: string): Promise<{ acceso: AccesoEntity; rol: string } | null> {
-      // const acceso = await this.AccesoRepository.findOne({ where: { documento } });
-      // const contraseñaCoincide = await bcrypt.compare(password, acceso.password);
-      // if (acceso) {
-      //    if (contraseñaCoincide) {
-
-      //       const rol = this.determinarRol(acceso);
-      //       return { acceso, rol };
-
-      //    }
-
-
-      // }
-      return null;
+   getAccesoDocumento(documento: number): Promise<AccesoEntity> {
+      return this.accesoService.findOne({
+         where: { documento }
+      })
    }
 
-   loginValidate(data: CreateDtoAcceso): Promise<AccesoEntity> {
-      // const acceso = this.AccesoRepository.findOne({ where: { documento: data.documento } });
-      // if (acceso) {
-      //    // const contraseñaCoincide = bcrypt.compare(data.password, acceso);
-      //    // if (contraseñaCoincide) {
-      //       return acceso;
-      //    // }
-      // }
-      return null;
+   async loginValidate(accesoUser: LoginDTO) {
+      const validateDocumento = await this.getAccesoDocumento(accesoUser.documento);
+
+      if (!validateDocumento) {
+         throw new Error("No se encontró el documento");
+      }
+
+      const validatePassword = bcrypt.compareSync(accesoUser.password, validateDocumento.password);
+      if (!validatePassword) {
+         throw new Error("Contraseña incorrecta");
+      }
+      
+      var dataToken = {}
+      const secretKey = "shh"
+
+      if (validateDocumento.tablaAcceso === 1) {
+         const userToken = await this.usuarioService.findOne({
+            where: { documento: validateDocumento.documento },
+            relations: ['tipoDocumentoUsuario', 'rolUsuario']
+         });
+         dataToken = {
+            userInfo: userToken,
+            userAccess: validateDocumento
+         }
+      } else if (validateDocumento.tablaAcceso === 2) {
+         const userToken = await this.aprendizService.findOne({
+            where: { documento: validateDocumento.documento },
+            relations: ['tipoDocumentoAprendiz', 'rolAprendiz', 'fichaAprendiz.usuarioFichaDirector', 'fichaAprendiz.programaFicha', 'grupoAprendiz']
+         });
+         dataToken = {
+            userInfo: userToken,
+            userAccess: validateDocumento,
+         }
+      }
+      console.log("Valor jwt:", jwt)
+      const token = jwt.sign(dataToken, secretKey, { expiresIn: "1h" });
+      const data = {
+         token,
+         userSave: dataToken
+      }
+      return data;
    }
-
-   private determinarRol(acceso: AccesoEntity): string {
-      // if (acceso.aprendicesAcceso) {
-      //    return 'aprendiz';
-      // } else if (acceso.usuariosAcceso) {
-      //    return 'usuario';
-      // }
-      return '';
-   }
-
-
-   async getAccesos() {
-      // return await this.AccesoRepository.find()
-   }
-
-   async getAcceso(id: number) {
-      // const accesoFound = await this.AccesoRepository.findOne({
-      //    where: {
-      //       idAcceso: id
-      //    }
-      // });
-
-      // if (!accesoFound) {
-      //    return new HttpException('Acceso no encontrado', 404)
-      // }
-      // return accesoFound
-
-   }
-
-   async updateAcceso(idAcceso: any, acceso: updateDtoAcceso) {
-      // const searchAcceso = await this.AccesoRepository.findOne({
-      //    where: {
-      //       idAcceso
-      //    }
-
-      // });
-
-      // if (!searchAcceso) {
-      //    return new HttpException('Acceso no encontrado', 404)
-
-      // }
-
-      // const updateAcces = this.AccesoRepository.merge(searchAcceso, plainToClass(AccesoEntity, acceso));
-      // return this.AccesoRepository.save(updateAcces);
-
-   }
-
-
-
-
 }

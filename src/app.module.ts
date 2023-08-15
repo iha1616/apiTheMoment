@@ -28,7 +28,7 @@ import { AccesoModule } from "./modules/acceso/acceso.module";
       isGlobal: true,
       load: [config],
       envFilePath: ".env",
-   }), DatabaseModule, GrupoProyectoModule, ComiteModule, QuejasModule, PlanMejoramientoModule, EntregaFichaModule, ObservacionesAprendizModule, EstadoDecisionModule, MotivosComiteModule, DecisionComiteModule, EstadoQuejasModule, UsuariosModule, TipoDocumentoModule, RolesPermisoModule, RolesModule, ResultadoAprendizajeModule, ProgramasFormativosModule, ProgramaCoordinacionModule, PermisosModule, FichasModule, FichaUsuarioModule, CompetenciasModule, AprendicesModule, AccesoModule],
+   }), DatabaseModule,AccesoModule, UsuariosModule, GrupoProyectoModule, ComiteModule, QuejasModule, PlanMejoramientoModule, EntregaFichaModule, ObservacionesAprendizModule, EstadoDecisionModule, MotivosComiteModule, DecisionComiteModule, EstadoQuejasModule, TipoDocumentoModule, RolesPermisoModule, RolesModule, ResultadoAprendizajeModule, ProgramasFormativosModule, ProgramaCoordinacionModule, PermisosModule, FichasModule, FichaUsuarioModule, CompetenciasModule, AprendicesModule],
    providers: []
 })
 

@@ -27,6 +27,13 @@ export class QuejasService {
       })
    }
 
+   getQuejaPCA(id: any): Promise<QuejasComiteEntity[]> {
+      return this.quejaRepository.find({
+         where: { competenciaQueja: { programasCompetencia: { idProgramaFormativo: id } } },
+         relations: ["aprendizQueja.fichaAprendiz", "usuarioQueja", "motivoQueja", "estadoQueja", "comiteQueja", "decisionQueja", "competenciaQueja.programasCompetencia", "resultadoAQueja"]
+      })
+   }
+
    getQuejaComite(id: any): Promise<QuejasComiteEntity[]> {
       return this.quejaRepository.find({
          where: { comiteQueja: { codigoComite: id } },

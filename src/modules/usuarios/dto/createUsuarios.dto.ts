@@ -35,10 +35,6 @@ export class createUsuarioDto {
      @IsNotEmpty()
      @ApiProperty()
      rolUsuario: number;
-
-     @IsNotEmpty()
-     @ApiProperty()
-     accesoUsuario: number
 }
 
 export class updateUsuarioDto extends PartialType(createUsuarioDto) {}

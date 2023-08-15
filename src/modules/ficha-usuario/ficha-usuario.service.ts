@@ -20,11 +20,11 @@ export class FichaUsuarioService {
         if(!FichaFound){
             return new HttpException('Ficha no encontrada', 400)
         }
-        const UsuaFound = await this.UsuarioService.getUsuario(fichaUsua.usuario)
+      //   const UsuaFound = await this.UsuarioService.getUsuario(fichaUsua.usuario)
 
-        if(!UsuaFound){
-            return new HttpException('Usuario no encontrado', 400)
-        }
+      //   if(!UsuaFound){
+            // return new HttpException('Usuario no encontrado', 400)
+      //   }
 
         var validateExist = await this.getFichaUsuas()
         

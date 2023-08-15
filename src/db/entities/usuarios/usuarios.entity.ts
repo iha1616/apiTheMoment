@@ -30,11 +30,6 @@ export class UsuariosEntity {
    @JoinColumn({ name: "idRol" })
    rolUsuario: RolesEntity;
 
-   // !Sin uso se comentará
-   // @ManyToOne(() => AccesoEntity, (acceso) => acceso.usuariosAcceso, { nullable: false, onUpdate: "CASCADE", onDelete: "CASCADE" })
-   // @JoinColumn({ name: "idAcceso" })
-   // accesoUsuario: AccesoEntity;
-
    //======== Claves foráneas para otras tablas ========
    @ManyToMany(() => ProgramasFormativosEntity, (programaFormativo) => programaFormativo.usuariosPrograma)
    programaUsuarios: ProgramasFormativosEntity[];

@@ -1,12 +1,13 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { AccesoController } from './acceso.controller';
 import { AccesoService } from './acceso.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AccesoEntity } from 'src/db/entities';
-import { JwtModule } from '@nestjs/jwt';
+import { AccesoEntity, AprendicesEntity, UsuariosEntity } from 'src/db/entities';
+import { UsuariosModule } from '../usuarios/usuarios.module';
+import { AprendicesModule } from '../aprendices/aprendices.module';
+
 @Module({
-  imports: [TypeOrmModule.forFeature([AccesoEntity]), JwtModule.register({
-    secret: 'TuClaveSecreta' })],
+  imports: [TypeOrmModule.forFeature([AccesoEntity, UsuariosEntity, AprendicesEntity]), forwardRef(() => UsuariosModule), forwardRef(() => AprendicesModule)],
   controllers: [AccesoController],
   providers: [AccesoService],
   exports: [AccesoService]

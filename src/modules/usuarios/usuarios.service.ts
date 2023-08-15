@@ -13,95 +13,62 @@ import { AccesoEntity } from 'src/db/entities';
 
 @Injectable()
 export class UsuariosService {
-    constructor(@InjectRepository(UsuariosEntity) private UsuariosRepository: Repository<UsuariosEntity>, 
-    private TipoDocuService : TipoDocumentoService, 
-    private Roles : RolesService,
-    private accesoService: AccesoService
-    ){}
+   constructor(@InjectRepository(UsuariosEntity) private UsuariosRepository: Repository<UsuariosEntity>,
+      private accesoService: AccesoService
+   ) { }
 
-    async createUsuario(usuario: createUsuarioDto) {
-        const usuarioFound = await this.UsuariosRepository.findOne({
-            where: {
-                documento: usuario.documento,
-            },
-        });
+   async createUsuario(usuario: createUsuarioDto): Promise<UsuariosEntity> {
+      const validateDocumento = await this.accesoService.getAccesoDocumento(usuario.documento);
 
-        if (usuarioFound) {
-            throw new HttpException('Usuario ya está registrado', 400);
-        }
+      if (validateDocumento) {
+         throw "Documento ya registrado"
+      }
 
-        const tipoFound = await this.TipoDocuService.getTipo(usuario.tipoDocumentoUsuario);
+      const createUsuario = this.UsuariosRepository.create(plainToClass(UsuariosEntity, usuario));
+      const saveUsuario = await this.UsuariosRepository.save(createUsuario);
 
-        if (!tipoFound) {
-            throw new HttpException('Tipo de documento no encontrado', 404);
-        }
+      if (!saveUsuario) {
+         throw "F, no se pudo"
+      }
 
-        const rolFound = await this.Roles.getRol(usuario.rolUsuario);
+      const accesoUsuario = {
+         documento: saveUsuario.documento,
+         password: saveUsuario.documento,
+         idUsuarioAprendiz: saveUsuario.idUsuario,
+         tablaAcceso: 1
+      }
 
-        if (!rolFound) {
-            throw new HttpException('Rol no encontrado', 400);
-        }
+      await this.accesoService.createAcceso(plainToClass(AccesoEntity, accesoUsuario))
 
-        const createAccesso = {
-            documento: usuario.documento,
-            password: usuario.documento,
-        };
+      return saveUsuario
+   }
 
-        const newAcceso = await this.accesoService.createAcceso(plainToClass(AccesoEntity, createAccesso));
+   async getUsuarios() {
+      return await this.UsuariosRepository.find({
+         relations: ['tipoDocumentoUsuario', 'rolUsuario']
+      });
+   }
 
-      //   if (!(newAcceso instanceof AccesoEntity)) {
-      //       throw new HttpException('No se pudo crear el Usuario', 500);
-      //   }
+   async updateUsuario(idUsuario: any, usuario: updateUsuarioDto) {
+      const searchUsua = await this.UsuariosRepository.findOne({
+         where: { idUsuario }
+      })
 
-      //   const newUsuario = plainToClass(UsuariosEntity, usuario);
-      //   newUsuario.accesoUsuario = newAcceso;
+      if (!searchUsua) {
+         return new HttpException('Usuario no encontrado', 404)
+      }
 
-      //   return this.UsuariosRepository.save(newUsuario);
-    }
-
-    getUsuarios(){
-        return this.UsuariosRepository.find({
-            relations : ['tipoDocumentoUsuario', 'rolUsuario', 'accesoUsuario']
-        });
-    }
-
-    async getUsuario(id: any){
-
-   //      const usuarioFound = await this.UsuariosRepository.findOne({
-   //          where:{
-   //              accesoUsuario: { idAcceso: id }
-   //          },
-   //          relations : ['tipoDocumentoUsuario', 'rolUsuario', 'accesoUsuario']
-   //      });
-
-   //      if(!usuarioFound){
-   //          return new HttpException('Usuario no encontrado', 404)
-   //      }
-   //      return usuarioFound;
-   //  }
-
-   //   async updateUsuario(idUsuario: any, usuario: updateUsuarioDto){
-   //      const searchUsua = await this.UsuariosRepository.findOne({
-   //         where: { idUsuario }
-   //      })
-  
-   //      if (!searchUsua) {
-   //          return new HttpException('Usuario no encontrado', 404)
-   //      }
-  
-   //      const updateUsua = this.UsuariosRepository.merge(searchUsua, plainToClass(UsuariosEntity, usuario));
-   //      return this.UsuariosRepository.save(updateUsua);
-
-   return null
-     }
+      const updateUsua = this.UsuariosRepository.merge(searchUsua, plainToClass(UsuariosEntity, usuario));
+      return this.UsuariosRepository.save(updateUsua);
+   }
 
 
-     getUsuariosRol(id: any): Promise<UsuariosEntity[]> {
+   getUsuariosRol(id: any): Promise<UsuariosEntity[]> {
       return this.UsuariosRepository.find({
          where: { rolUsuario: { idRol: id } },
-         relations : ['tipoDocumentoUsuario', 'rolUsuario', 'accesoUsuario']
+         relations: ['tipoDocumentoUsuario', 'rolUsuario']
       })
-     }
+   }
 
 
 

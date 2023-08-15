@@ -40,10 +40,6 @@ export class DtoAprendiz{
     @ApiProperty()
     fichaAprendiz: number;
 
-   //  @IsNotEmpty()
-    @ApiProperty()
-    accesoAprendiz?: number;
-
     @ApiProperty()
     grupoAprendiz?: number
 }

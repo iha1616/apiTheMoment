@@ -22,11 +22,11 @@ export class FichasService {
             return new HttpException('Código de ficha ya esta registrado', 400)
         }
 
-        const usuarioFound =  await this.Usuario.getUsuario(fichas.usuarioFichaDirector)
+      //   const usuarioFound =  await this.Usuario.getUsuario(fichas.usuarioFichaDirector)
         
-        if(!usuarioFound){
-            return new HttpException('Usuario no encontrado', 404)
-        }
+      //   if(!usuarioFound){
+            // return new HttpException('Usuario no encontrado', 404)
+      //   }
 
         const pfFound = await this.Pformativo.getPF(fichas.programaFicha)
 

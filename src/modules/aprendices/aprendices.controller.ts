@@ -1,14 +1,14 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
 import { AprendicesService } from './aprendices.service';
 import { AprendicesEntity } from 'src/db/entities';
-import { UpdateAprendicesDto } from './dto/createDto';
+import { DtoAprendiz, UpdateAprendicesDto } from './dto/createDto';
 
 @Controller('aprendices')
 export class AprendicesController {
     constructor(private aprendicesService: AprendicesService) {}
 
     @Post()
-    async createAprendiz(@Body() aprendiz) {
+    async createAprendiz(@Body() aprendiz: DtoAprendiz) {
         return await this.aprendicesService.createAprendiz(aprendiz)
     }
 

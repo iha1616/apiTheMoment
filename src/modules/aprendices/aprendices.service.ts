@@ -13,55 +13,45 @@ import { plainToClass } from 'class-transformer';
 export class AprendicesService {
    constructor(
       @InjectRepository(AprendicesEntity) private AprendizRepository: Repository<AprendicesEntity>,
-      private TipoDocu: TipoDocumentoService,
-      private Roles: RolesService,
       private accesoService: AccesoService
    ) { }
 
-   async createAprendiz(aprendiz: DtoAprendiz) {
-      const AprendizAccesoFound = await this.AprendizRepository.findOne({
-         where: {
-            documento: aprendiz.documento
+      async createAprendiz(aprendiz: DtoAprendiz): Promise<AprendicesEntity> {
+         const validateDocumento = await this.accesoService.getAccesoDocumento(aprendiz.documento)
+
+         if (validateDocumento) {
+            throw "Documento ya registrado"
          }
-      })
 
-      if (AprendizAccesoFound) {
-         return new HttpException('Aprendiz ya esta registrado', 400)
+         const createAprendiz = this.AprendizRepository.create(plainToClass(AprendicesEntity, aprendiz))
+         const saveAprendiz = await this.AprendizRepository.save(createAprendiz)
+
+         if (!saveAprendiz) {
+            throw "F, no se registró"
+         }
+
+         const accesoAprendiz = {
+            documento: saveAprendiz.documento,
+            password: saveAprendiz.documento,
+            idUsuarioAprendiz: saveAprendiz.idAprendiz,
+            tablaAcceso: 2
+         }
+
+         await this.accesoService.createAcceso(plainToClass(AccesoEntity, accesoAprendiz))
+         return saveAprendiz
       }
 
-      const tipoFound = await this.TipoDocu.getTipo(aprendiz.tipoDocumentoAprendiz)
-
-      if (!tipoFound) {
-         return new HttpException('Tipo de documento no encontrado', 404)
+      getAprendizAcceso(documento: number): Promise<AprendicesEntity> {
+         return this.AprendizRepository.findOne({
+            where: { documento },
+            relations: ['tipoDocumentoAprendiz', 'rolAprendiz', 'fichaAprendiz.usuarioFichaDirector', 'fichaAprendiz.programaFicha', 'grupoAprendiz']
+         })
       }
 
-      const rolFound = await this.Roles.getRol(aprendiz.rolAprendiz)
-
-      if (!rolFound) {
-         return new HttpException('Rol no encontrado', 400)
-      }
-
-      // const salt = bcrypt.genSaltSync() 
-      // aprendiz.password = bcrypt.hashSync(aprendiz.password, salt)
-
-
-      const createAccess = {
-         documento: aprendiz.documento,
-         password: aprendiz.documento
-      }
-      const newAcceso = await this.accesoService.createAcceso(plainToClass(AccesoEntity, createAccess))
-      // if (!newAcceso) {
-      //    throw new Error("No se pudo crear el aprendiz");
-      // }
-      aprendiz.accesoAprendiz = newAcceso['idAcceso'];
-      const newAprendiz = this.AprendizRepository.create(plainToClass(AprendicesEntity, aprendiz))
-      return this.AprendizRepository.save(newAprendiz);
-   }
-
-
-   getAprendices() {
-      return this.AprendizRepository.find({
-         relations: ['tipoDocumentoAprendiz', 'rolAprendiz', 'fichaAprendiz.usuarioFichaDirector', 'fichaAprendiz.programaFicha', 'grupoAprendiz', 'accesoAprendiz']
+      
+   async getAprendices() {
+      return await this.AprendizRepository.find({
+         relations: ['tipoDocumentoAprendiz', 'rolAprendiz', 'fichaAprendiz.usuarioFichaDirector', 'fichaAprendiz.programaFicha', 'grupoAprendiz']
       })
    }
 
@@ -71,7 +61,7 @@ export class AprendicesService {
             idAprendiz: id
 
          },
-         relations: ['tipoDocumentoAprendiz', 'rolAprendiz', 'fichaAprendiz.usuarioFichaDirector', 'fichaAprendiz.programaFicha', 'grupoAprendiz', 'accesoAprendiz']
+         relations: ['tipoDocumentoAprendiz', 'rolAprendiz', 'fichaAprendiz.usuarioFichaDirector', 'fichaAprendiz.programaFicha', 'grupoAprendiz']
       });
 
       if (!aprendizFound) {
@@ -98,7 +88,7 @@ export class AprendicesService {
    getAprendicesFicha(fichaAprendiz: any): Promise<AprendicesEntity[]> {
       return this.AprendizRepository.find({
          where: { fichaAprendiz: { codigoFicha: fichaAprendiz } },
-         relations: ['tipoDocumentoAprendiz', 'rolAprendiz', 'fichaAprendiz.usuarioFichaDirector', 'fichaAprendiz.programaFicha', 'grupoAprendiz', 'accesoAprendiz']
+         relations: ['tipoDocumentoAprendiz', 'rolAprendiz', 'fichaAprendiz.usuarioFichaDirector', 'fichaAprendiz.programaFicha', 'grupoAprendiz']
       })
    }
 }

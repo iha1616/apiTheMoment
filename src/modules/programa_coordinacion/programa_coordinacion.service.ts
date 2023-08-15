@@ -20,11 +20,11 @@ export class ProgramaCoordinacionService {
             return new HttpException('Programa formativo no encontrado', 400)
         }
 
-        const usuarioFound = await this.UsuarioService.getUsuario(pca.usuario)
+      //   const usuarioFound = await this.UsuarioService.getUsuario(pca.usuario)
 
-        if(!usuarioFound){
-            return new HttpException('Usuaro no encontrado', 400)
-        }
+      //   if(!usuarioFound){
+            // return new HttpException('Usuaro no encontrado', 400)
+      //   }
 
         const newPCA = this.PCArepository.create(plainToClass(PCAEntity, pca))
         return this.PCArepository.save(newPCA);

@@ -14,9 +14,8 @@ export class ProgramaCoordinacionController {
     }
 
     @Get(':id')
-    getPCA(@Param('id', ParseIntPipe)id: number){
+    getPCA(@Param('id', ParseIntPipe) id: number){
         return this.PCAService.getPCA(id)
-
     }
 
     @Post()

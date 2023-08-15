@@ -15,8 +15,4 @@ export class TipoDocumentoEntity {
 
    @OneToMany(() => AprendicesEntity, (aprendices) => aprendices.tipoDocumentoAprendiz)
    aprendicesTipoDocumento: AprendicesEntity[];
-
-   // !Campo modificado
-   @OneToMany(() => AccesoEntity, (acceso) => acceso.tipoDocumentoAcceso)
-   accesoTipoDocumento: AccesoEntity[];
 } 
