@@ -34,12 +34,24 @@ export class AccesoService {
       const validateDocumento = await this.getAccesoDocumento(accesoUser.documento);
 
       if (!validateDocumento) {
-         throw new Error("No se encontró el documento");
+         const error = {
+            error: "Documento no encontrado",
+            label: "documento",
+            status: false,
+         }
+         console.log(error)
+         return error
       }
 
       const validatePassword = bcrypt.compareSync(accesoUser.password, validateDocumento.password);
       if (!validatePassword) {
-         throw new Error("Contraseña incorrecta");
+         const error = {
+            error: "Contraseña incorrecta",
+            label: "password",
+            status: false,
+         }
+         console.log(error)
+         return error
       }
       
       var dataToken = {}
@@ -61,10 +73,15 @@ export class AccesoService {
          });
          dataToken = {
             userInfo: userToken,
-            userAccess: validateDocumento,
+            userAccess: {
+               idAcceso: validateDocumento.idAcceso,
+               documento: validateDocumento.documento,
+               idUsuarioAprendiz: validateDocumento.idUsuarioAprendiz,
+               tablaAcceso: validateDocumento.tablaAcceso,
+            },
          }
       }
-      console.log("Valor jwt:", jwt)
+      // console.log("Valor jwt:", jwt)
       const token = jwt.sign(dataToken, secretKey, { expiresIn: "1h" });
       const data = {
          token,
