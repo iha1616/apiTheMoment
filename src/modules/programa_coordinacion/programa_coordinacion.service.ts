@@ -32,6 +32,13 @@ export class ProgramaCoordinacionService {
 
     }
 
+    getByProgramaF(id: any): Promise<PCAEntity[]> {
+      return this.PCArepository.find({
+         where: { programaFormativo: { idProgramaFormativo: id } },
+         relations: ['programaFormativo', 'usuario']
+      })
+    }
+
 
     getPCAS(){
         return this.PCArepository.find({

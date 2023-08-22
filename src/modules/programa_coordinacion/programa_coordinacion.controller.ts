@@ -13,6 +13,11 @@ export class ProgramaCoordinacionController {
 
     }
 
+    @Get("byPF/:id")
+    async getByProgramaF(@Param("id", ParseIntPipe) id: number) {
+      return await this.PCAService.getByProgramaF(id);
+    }
+
     @Get(':id')
     getPCA(@Param('id', ParseIntPipe) id: number){
         return this.PCAService.getPCA(id)
