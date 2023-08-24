@@ -24,7 +24,7 @@ export class MotivosComiteController {
    }
 
    @Post(":id")
-   async actualizarMotivo(@Param('id', ParseIntPipe) id, @Body() motivo: UpdateMotivoComiteDto) {
+   async actualizarMotivo(@Param('id', ParseIntPipe) id: number, @Body() motivo: UpdateMotivoComiteDto) {
       return await this.motivoService.actualizarMotivo(id, motivo);
    }
 }

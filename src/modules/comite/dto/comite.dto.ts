@@ -4,7 +4,11 @@ import { ApiProperty, PartialType } from '@nestjs/swagger';
 export class CreateComiteDto {
    @IsNotEmpty()
    @ApiProperty()
-   fechaHora: Date
+   fechaHoraInicio: Date
+
+   @IsNotEmpty()
+   @ApiProperty()
+   fechaHoraFin: Date
    
    @IsNotEmpty()
    @ApiProperty()
@@ -16,7 +20,7 @@ export class CreateComiteDto {
 
    @IsNotEmpty()
    @ApiProperty()
-   link?: string;
+   link: string;
 
    @ApiProperty()
    estadoComite?: boolean;
