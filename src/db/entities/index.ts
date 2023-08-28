@@ -1,7 +1,6 @@
 export { TipoDocumentoEntity } from "./usuarios/tipo_documento.entity";
 export { RolesEntity } from "./roles_permisos/roles.entity";
 export { PermisosEntity } from "./roles_permisos/permisos.entity";
-export { RolesPermisosEntity } from "./roles_permisos/roles_permisos.entity";
 export { EstadoDecisionEntity } from "./utilities/estado_decision.entity";
 export { MotivosComiteEntity } from "./utilities/motivos_comite.entity";
 export { EstadoQuejasEntity } from "./quejas/estados_quejas.entity";
