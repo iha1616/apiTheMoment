@@ -31,7 +31,7 @@ export class ProgramaCoordinacionController {
 
     @Put(':id')
     updatePCA(@Param('id', ParseIntPipe) id: number, @Body() PCA : UpdatePCADto){
-        this.PCAService.updatePCA(id, PCA)
+       return this.PCAService.updatePCA(id, PCA)
 
     }
 }
