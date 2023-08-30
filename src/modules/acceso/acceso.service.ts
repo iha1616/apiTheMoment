@@ -82,7 +82,7 @@ export class AccesoService {
          }
       }
       // console.log("Valor jwt:", jwt)
-      const token = jwt.sign(dataToken, secretKey, { expiresIn: "1h" });
+      const token = jwt.sign(dataToken, secretKey, { expiresIn: "20h" });
       const data = {
          token,
          userSave: dataToken
