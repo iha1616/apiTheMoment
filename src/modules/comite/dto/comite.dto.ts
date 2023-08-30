@@ -23,7 +23,7 @@ export class CreateComiteDto {
    link: string;
 
    @ApiProperty()
-   estadoComite?: boolean;
+   estadoComite?: number;
    
    @ApiProperty()
    acta?: string;

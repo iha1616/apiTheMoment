@@ -26,6 +26,12 @@ export class ComiteController {
       return await this.comiteService.mostrarComite(id);
    }
 
+   // http://localhost:3000/api/comite/status/:id
+   @Get("status/:id")
+   async getComiteByStatus(@Param('id', ParseIntPipe) id: number) {
+      return await this.comiteService.getComiteByStatus(id);
+   }
+
    // http://localhost:3000/api/comite/:id
    @Post(":id")
    async actualizarComite(@Param('id', ParseIntPipe) id: number, @Body() comite: UpdateComiteDto) {
