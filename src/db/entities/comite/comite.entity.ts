@@ -15,8 +15,8 @@ export class ComiteEntity {
    @Column({ type: "bigint" })
    codigoComite: number; 
 
-   @Column({ default: false })
-   estadoComite: boolean;
+   @Column({ default: 0 })
+   estadoComite: number;
 
    @Column({ nullable: true })
    link: string;
