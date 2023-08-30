@@ -13,11 +13,11 @@ export class PlanMejoramientoService {
       const newPlan = this.planMejoramientoRepository.create(plainToClass(PlanMejoramientoEntity, plan))
       return this.planMejoramientoRepository.save(newPlan)
    }
-    getPlan(){
-        return this.planMejoramientoRepository.find({
-            relations: ["quejaPlanMejoramiento.competenciaQueja", "quejaPlanMejoramiento.resultadoAQueja", "usuarioPlanMejoramiento", "aprendizPlanMejoramiento.fichaAprendiz", "decisionPlanMejoramiento", "motivoPlanMejoramiento"]
-        })
-    } 
+   getPlan() {
+      return this.planMejoramientoRepository.find({
+         relations: ["quejaPlanMejoramiento.competenciaQueja", "quejaPlanMejoramiento.resultadoAQueja", "usuarioPlanMejoramiento", "aprendizPlanMejoramiento.fichaAprendiz", "decisionPlanMejoramiento", "motivoPlanMejoramiento"]
+      })
+   }
    // getPlan(usuarioPlanMejoramiento: any) {
    //    return this.planMejoramientoRepository.find({
    //       where: { usuarioPlanMejoramiento: { idUsuario: usuarioPlanMejoramiento } },
@@ -33,7 +33,10 @@ export class PlanMejoramientoService {
    }
 
    getOnePlan(id: number) {
-      return this.planMejoramientoRepository.findOne({ where: { idPlanMejoramiento: id } })
+      return this.planMejoramientoRepository.findOne({
+         where: { idPlanMejoramiento: id },
+         relations: ["quejaPlanMejoramiento", "usuarioPlanMejoramiento", "aprendizPlanMejoramiento", "decisionPlanMejoramiento", "motivoPlanMejoramiento"]
+      })
    }
    async actualizarGrupo(idPlanMejoramiento: any, plan: UpdatePlanMejoramientoDTO): Promise<PlanMejoramientoEntity> {
       const searchPlan = await this.planMejoramientoRepository.findOne({
