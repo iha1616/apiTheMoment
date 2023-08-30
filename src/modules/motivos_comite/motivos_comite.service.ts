@@ -22,14 +22,38 @@ export class MotivosComiteService {
       return this.motivosService.findOne(idMotivo);
    }
 
-   actualizarMotivo(idMotivo: any, motivo: UpdateMotivoComiteDto): Promise<MotivosComiteEntity> {
-      const searchMotivo = this.motivosService.findOne(idMotivo);
+   async actualizarMotivo(idMotivo: any, motivo: UpdateMotivoComiteDto) {
+      const searchMotivo = await this.motivosService.findOne({
+         where: { idMotivoComite: idMotivo }
+      });
 
       if (!searchMotivo) {
-         throw new Error("Motivo no encontrado");
+         const error = {
+            error: "Motivo no encontrado",
+            status: false,
+         }
+         return error
+      }
+      const validExist = await this.listarMotivos()
+      const validate = validExist.filter(item => item.nombreMotivo === motivo.nombreMotivo)
+
+      if (validate.length > 0) {
+         const error = {
+            error: "El motivo ya existe",
+            status: false,
+         }
+         return error
       }
 
       const updateMotivo = this.motivosService.merge(plainToClass(MotivosComiteEntity, searchMotivo), plainToClass(MotivosComiteEntity, motivo));
-      return this.motivosService.save(updateMotivo);
+      const updated = await this.motivosService.save(updateMotivo);
+
+      return {
+         data: updated,
+         success: {
+            success: "Motivo actualizado correctamente",
+            status: 200
+         }
+      }
    }
 }

@@ -13,6 +13,11 @@ export class ProgramaCoordinacionController {
 
     }
 
+    @Get("byPF/:id")
+    async getByProgramaF(@Param("id", ParseIntPipe) id: number) {
+      return await this.PCAService.getByProgramaF(id);
+    }
+
     @Get(':id')
     getPCA(@Param('id', ParseIntPipe) id: number){
         return this.PCAService.getPCA(id)
@@ -26,7 +31,7 @@ export class ProgramaCoordinacionController {
 
     @Put(':id')
     updatePCA(@Param('id', ParseIntPipe) id: number, @Body() PCA : UpdatePCADto){
-        this.PCAService.updatePCA(id, PCA)
+       return this.PCAService.updatePCA(id, PCA)
 
     }
 }

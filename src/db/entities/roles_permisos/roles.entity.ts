@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { AprendicesEntity, PermisosEntity, UsuariosEntity } from "..";
 
 @Entity('roles')
@@ -17,5 +17,19 @@ export class RolesEntity {
    aprendicesRol: AprendicesEntity[];
 
    @ManyToMany(() => PermisosEntity, (permiso) => permiso.rolPermisos)
+   @JoinTable({
+      
+      name: 'roles_permisos',
+      joinColumn: {
+         name: 'rolId',
+         referencedColumnName: 'idRol',
+      },
+      inverseJoinColumn: {
+         name: 'permisoId',
+         referencedColumnName: 'idPermiso',
+      },
+   })
    permisosRol: PermisosEntity[];
+
+     
 }

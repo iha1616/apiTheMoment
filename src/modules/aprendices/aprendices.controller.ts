@@ -23,7 +23,7 @@ export class AprendicesController {
         return this.aprendicesService.getAprendiz(id);
     }
 
-    @Post(':id')
+    @Put(':id')
     updateAprendiz(@Param('id', ParseIntPipe)id: number, @Body() aprendiz : UpdateAprendicesDto){
       return this.aprendicesService.updateAprendiz(id, aprendiz)
 

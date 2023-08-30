@@ -7,13 +7,16 @@ export class ComiteEntity {
    idComite: number;
 
    @Column({ type: "datetime" })
-   fechaHora: Date;
+   fechaHoraInicio: Date;
+
+   @Column({ type: "datetime" })
+   fechaHoraFin: Date;
 
    @Column({ type: "bigint" })
    codigoComite: number; 
 
-   @Column({ default: false })
-   estadoComite: boolean;
+   @Column({ default: 0 })
+   estadoComite: number;
 
    @Column({ nullable: true })
    link: string;

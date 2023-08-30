@@ -22,13 +22,28 @@ export class DecisionComiteService {
       return this.decisionService.findOne(idDecision);
    }
 
-   actualizarDecision(idDecision: any, decision: UpdateDecisionComiteDto): Promise<DecisionesComiteEntity> {
-      const searchDecision = this.decisionService.findOne(idDecision)
+   async actualizarDecision(idDecision: any, decision: UpdateDecisionComiteDto) {
+      const searchDecision = await this.decisionService.findOne({
+         where: { idDecision: idDecision }
+      });
 
       if (!searchDecision) {
-         throw new Error("Estado no encontrado");
+         const error = {
+            error: "Decisión no encontrada",
+            status: false,
+         }
+         return error
       }
+      const validExist = await this.listarDecisiones()
+      const validate = validExist.filter(item => item.nombreDecision === decision.nombreDecision)
 
+      if (validate.length > 0) {
+         const error = {
+            error: "La decisión ya existe",
+            status: false,
+         }
+         return error
+      }
       const updateDecision = this.decisionService.merge(plainToClass(DecisionesComiteEntity, searchDecision), plainToClass(DecisionesComiteEntity, decision));
       return this.decisionService.save(updateDecision);
    }

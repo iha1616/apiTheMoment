@@ -59,4 +59,8 @@ export class QuejasService {
       const updateQueja = this.quejaRepository.merge(searchQueja, plainToClass(QuejasComiteEntity, queja));
       return this.quejaRepository.save(updateQueja);
    }
+
+   deleteQueja(id:number){
+      return this.quejaRepository.delete({idQueja:id})
+   }
 }

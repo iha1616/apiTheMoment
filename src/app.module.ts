@@ -10,7 +10,7 @@ import { DecisionComiteModule } from "./modules/decision_comite/decision_comite.
 import { EstadoQuejasModule } from "./modules/estado_quejas/estado_quejas.module";
 import { UsuariosModule } from "./modules/usuarios/usuarios.module";
 import { TipoDocumentoModule } from "./modules/tipo-documento/tipo-documento.module";
-import { RolesPermisoModule } from "./modules/roles_permiso/roles_permiso.module";
+// import { RolesPermisoModule } from "./modules/roles_permiso/roles_permiso.module";
 import { RolesModule } from "./modules/roles/roles.module";
 import { ResultadoAprendizajeModule } from "./modules/resultado_aprendizaje/resultado_aprendizaje.module";
 import { ProgramasFormativosModule } from "./modules/programas_formativos/programas_formativos.module";
@@ -28,7 +28,7 @@ import { AccesoModule } from "./modules/acceso/acceso.module";
       isGlobal: true,
       load: [config],
       envFilePath: ".env",
-   }), DatabaseModule,AccesoModule, UsuariosModule, GrupoProyectoModule, ComiteModule, QuejasModule, PlanMejoramientoModule, EntregaFichaModule, ObservacionesAprendizModule, EstadoDecisionModule, MotivosComiteModule, DecisionComiteModule, EstadoQuejasModule, TipoDocumentoModule, RolesPermisoModule, RolesModule, ResultadoAprendizajeModule, ProgramasFormativosModule, ProgramaCoordinacionModule, PermisosModule, FichasModule, FichaUsuarioModule, CompetenciasModule, AprendicesModule],
+   }), DatabaseModule,AccesoModule, UsuariosModule, GrupoProyectoModule, ComiteModule, QuejasModule, PlanMejoramientoModule, EntregaFichaModule, ObservacionesAprendizModule, EstadoDecisionModule, MotivosComiteModule, DecisionComiteModule, EstadoQuejasModule, TipoDocumentoModule, RolesModule, ResultadoAprendizajeModule, ProgramasFormativosModule, ProgramaCoordinacionModule, PermisosModule, FichasModule, FichaUsuarioModule, CompetenciasModule, AprendicesModule],
    providers: []
 })
 
