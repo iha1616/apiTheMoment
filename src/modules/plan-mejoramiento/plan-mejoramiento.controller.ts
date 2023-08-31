@@ -33,26 +33,26 @@ export class PlanMejoramientoController {
         return this.planMejoramientoService.createPlan(newPlan);
     }
 
-    @UseInterceptors(
-        FileInterceptor(
-            'file',
-            {
-                storage: diskStorage({
-                    destination: './uploadsPM',
-                    filename: function(req, file, cb){
-                        cb(null, file.originalname + '_' + Date.now() )
-                    }
-                })
-            }
-        )
-    )
+    // @UseInterceptors(
+    //     FileInterceptor(
+    //         'file',
+    //         {
+    //             storage: diskStorage({
+    //                 destination: './uploadsPM',
+    //                 filename: function(req, file, cb){
+    //                     cb(null, file.originalname + '_' + Date.now() )
+    //                 }
+    //             })
+    //         }
+    //     )
+    // )
 
-    @Post('file')
-    uplodFile(@UploadedFile() file: Express.Multer.File) {
-        return {
-            msg: `Archivo ${file.filename} cargado correctamenta`
-        }
-    }
+    // @Post('file')
+    // uplodFile(@UploadedFile() file: Express.Multer.File) {
+    //     return {
+    //         msg: `Archivo ${file.filename} cargado correctamenta`
+    //     }
+    // }
 
 
 

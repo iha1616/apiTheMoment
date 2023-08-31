@@ -11,6 +11,7 @@ export class AprendicesController {
     async createAprendiz(@Body() aprendiz: DtoAprendiz) {
         return await this.aprendicesService.createAprendiz(aprendiz)
     }
+    
 
     @Get()
     getAprendices(): Promise<AprendicesEntity[]>{

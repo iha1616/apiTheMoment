@@ -5,8 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ComiteEntity } from 'src/db/entities';
 
 @Module({
-   imports: [TypeOrmModule.forFeature([ComiteEntity])],
+  imports: [TypeOrmModule.forFeature([ComiteEntity])],
   controllers: [ComiteController],
-  providers: [ComiteService]
+  providers: [ComiteService],
 })
 export class ComiteModule {}

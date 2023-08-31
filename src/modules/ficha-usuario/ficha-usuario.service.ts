@@ -15,7 +15,7 @@ export class FichaUsuarioService {
     ){}
 
     async createFichaUsua(fichaUsua: CreateDtoFichasUsua){
-        const FichaFound = await this.FichaService.getFicha(fichaUsua.ficha)
+        const FichaFound = await this.FichaService.getFicha(fichaUsua)
 
         if(!FichaFound){
             return new HttpException('Ficha no encontrada', 400)
