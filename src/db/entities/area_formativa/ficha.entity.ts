@@ -17,7 +17,7 @@ export class FichasEntity {
    @JoinColumn({ name: "idProgramaFormativo" })
    programaFicha: ProgramasFormativosEntity;
 
-   @ManyToOne(() => UsuariosEntity, (usuarios) => usuarios.fichaDirectorUsuario)
+   @ManyToOne(() => UsuariosEntity, (usuarios) => usuarios.fichaDirectorUsuario, { nullable: false, onUpdate: "CASCADE", onDelete: "CASCADE" })
    @JoinColumn({ name: "idUsuario" })
    usuarioFichaDirector: UsuariosEntity;
 

@@ -9,6 +9,9 @@ export class ProgramasFormativosEntity {
    @Column()
    nombrePF: string;
 
+   @Column()
+   abreviaturaPF: string;
+
    @Column({ type: "bigint" })
    codigoPF: number;
 

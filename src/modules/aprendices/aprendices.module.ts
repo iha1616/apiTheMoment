@@ -12,3 +12,4 @@ import { AccesoModule } from '../acceso/acceso.module';
   exports:[AprendicesService]
 })
 export class AprendicesModule {}
+
