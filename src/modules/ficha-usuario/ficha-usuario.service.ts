@@ -15,7 +15,7 @@ export class FichaUsuarioService {
     ){}
 
     async createFichaUsua(fichaUsua: CreateDtoFichasUsua){
-        const FichaFound = await this.FichaService.getFicha(fichaUsua)
+        const FichaFound = await this.FichaService.getFicha(fichaUsua.ficha);
 
         if(!FichaFound){
             return new HttpException('Ficha no encontrada', 400)
@@ -25,19 +25,24 @@ export class FichaUsuarioService {
       //   if(!UsuaFound){
             // return new HttpException('Usuario no encontrado', 400)
       //   }
+      console.log("FICHA", FichaFound)
 
         var validateExist = await this.getFichaUsuas()
-        
-      //   console.log("a1")
+      
+        console.log("a1")
         validateExist.map((i) => {
-            if (i.usuario.idUsuario == fichaUsua.usuario && i.ficha.idFicha == fichaUsua.ficha) {
+            if (i.usuario.idUsuario == fichaUsua.usuario && i.ficha.codigoFicha == fichaUsua.ficha) {
                return validateExist = null
                // console.log("aaa")
             }
-        })
+        }, [FichaFound])
         if (validateExist != null) {
          //   console.log("b1")
-           const newFichaUsua = this.FUrepository.create(plainToClass(FichaUsuariosEntity, fichaUsua))
+           const createFU = {
+               usuario: fichaUsua.usuario,
+               ficha: FichaFound
+           }
+           const newFichaUsua = this.FUrepository.create(plainToClass(FichaUsuariosEntity, createFU))
            return this.FUrepository.save(newFichaUsua);
         }
         return new HttpException('Ya está asignado a la ficha', 400)
