@@ -29,7 +29,7 @@ export class ProgramaCoordinacionController {
 
     }
 
-    @Put(':id')
+    @Post(':id')
     updatePCA(@Param('id', ParseIntPipe) id: number, @Body() PCA : UpdatePCADto){
        return this.PCAService.updatePCA(id, PCA)
 

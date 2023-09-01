@@ -25,7 +25,7 @@ export class RolesController {
         return this.rolesService.createRoles(CreateRolDto);
     }
 
-    @Put(':id')
+    @Post(':id')
     updateRoles(@Param('id', ParseIntPipe) id: number, @Body() roles: updateRoledto) {
         return this.rolesService.updateRol(id, roles);
     }

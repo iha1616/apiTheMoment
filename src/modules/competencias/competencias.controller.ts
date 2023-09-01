@@ -22,7 +22,7 @@ export class CompetenciasController {
         return this.compeService.getCompetencia(id);
     }
 
-    @Put(':id')
+    @Post(':id')
     updateCompetencia(@Param('id', ParseIntPipe)id: number, @Body() competencia : UpdateCompeDto){
       return this.compeService.updateCompetencia(id, competencia)
 

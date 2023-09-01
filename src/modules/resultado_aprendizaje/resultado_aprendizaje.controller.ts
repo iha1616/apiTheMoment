@@ -22,7 +22,7 @@ export class ResultadoAprendizajeController {
         return this.raService.getRA(id);
     }
 
-    @Put(':id')
+    @Post(':id')
     updateRA(@Param('id', ParseIntPipe)id: number, @Body() ra : UpdateRADto){
       return this.raService.updateRA(id, ra)
 

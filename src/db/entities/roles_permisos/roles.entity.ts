@@ -1,5 +1,6 @@
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { AprendicesEntity, PermisosEntity, UsuariosEntity } from "..";
+//import { PrivilegiosEntity } from "./privilegios.entity";
 
 @Entity('roles')
 export class RolesEntity {
@@ -30,6 +31,10 @@ export class RolesEntity {
       },
    })
    permisosRol: PermisosEntity[];
+
+
+ 
+
 
      
 }

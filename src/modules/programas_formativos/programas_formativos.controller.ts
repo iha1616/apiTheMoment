@@ -25,7 +25,7 @@ export class ProgramasFormativosController {
 
     }
 
-    @Put(':id')
+    @Post(':id')
     updatePf(@Param('id', ParseIntPipe) id: number, @Body() pf : UpdatePFdto){
         return this.PFService.updatePf(id, pf)
 
