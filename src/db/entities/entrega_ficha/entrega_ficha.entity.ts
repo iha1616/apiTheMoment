@@ -1,5 +1,5 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { CompetenciaEntity, FichasEntity, ResultadoAprendizajeEntity, UsuariosEntity } from '..';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { CompetenciaEntity, FichasEntity, ObservacionesAprendizEntity, ResultadoAprendizajeEntity, UsuariosEntity } from '..';
 
 @Entity('entrega_ficha')
 export class EntregaFichaEntity {
@@ -31,4 +31,8 @@ export class EntregaFichaEntity {
    @ManyToOne(() => ResultadoAprendizajeEntity, (resultadoAprendizaje) => resultadoAprendizaje.entregasFichaResultado, { nullable: false, onUpdate: "CASCADE", onDelete: "CASCADE" })
    @JoinColumn({ name: "idResultadoAprendizaje" })
    resultadoEntregaFicha: ResultadoAprendizajeEntity;
+
+   //======== Claves foránea para otras tablas ========
+   @OneToMany(() => ObservacionesAprendizEntity, (observacionesAprendiz) => observacionesAprendiz.entregaObservacionAprendiz)
+   observacionAprendizEntrega: ObservacionesAprendizEntity[];
 }
