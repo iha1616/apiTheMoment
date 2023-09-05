@@ -4,6 +4,7 @@ import { RolesEntity } from 'src/db/entities/roles_permisos/roles.entity';
 import { In, Repository } from 'typeorm';
 import { RolesDto, updateRoledto } from './dto/createRoles.dto';
 import { PermisosEntity } from 'src/db/entities/roles_permisos/permisos.entity';
+import { PrivilegiosEntity } from 'src/db/entities/roles_permisos/privilegios.entity';
 // import { RolesPermisosEntity } from 'src/db/entities/roles_permisos/roles_permisos.entity';
 
 @Injectable()
@@ -11,6 +12,7 @@ export class RolesService {
     constructor(
         @InjectRepository(RolesEntity) private RolesRepository: Repository<RolesEntity>,
         @InjectRepository(PermisosEntity) private PermisosRepository: Repository<PermisosEntity>,
+        @InjectRepository(PrivilegiosEntity) private PrivilegiosRepository: Repository<PrivilegiosEntity>
         // @InjectRepository(RolesPermisosEntity) private RolesPermisosRepository: Repository<RolesPermisosEntity>,
     ) { }
 
@@ -22,7 +24,8 @@ export class RolesService {
     async getRoles(): Promise<{ id: number; nombre: string; permisos: { id: number; nombre: string; }[] }[]> {
         const roles = await this.RolesRepository.find({
             relations: {
-                permisosRol: true
+                permisosRol: true,
+                privilegiosRol: true
             },
         });
 
@@ -96,6 +99,45 @@ export class RolesService {
         await this.RolesRepository.save(rol);
 
         return { message: 'Rol asignado correctamente' };
+    }
+
+
+
+    async asignarPrivilegiosARol(idRol: any, privilegiosIds: number[]) {
+        const rol = await this.RolesRepository.findOne({
+            where: {
+                idRol
+            },
+            relations: ['privilegiosRol'],
+        });
+
+        if (!rol) {
+            throw new HttpException('Rol no encontrado', 404);
+        }
+
+        const privilegiosExistentes = privilegiosIds.filter((privilegioId) =>
+            rol.privilegiosRol.some((privilegio) => privilegio.idPrivilegio === privilegioId)
+        );
+
+        if (privilegiosExistentes.length > 0) {
+            throw new HttpException('Algunos privilegios ya están asignados al rol', 400);
+        }
+
+        const privilegios = await this.PrivilegiosRepository.find({
+            where: {
+                idPrivilegio: In(privilegiosIds)
+            }
+        });
+
+        if (privilegios.length !== privilegiosIds.length) {
+            throw new HttpException('Algunos privilegios no existen', 400);
+        }
+
+        rol.privilegiosRol = [...rol.privilegiosRol, ...privilegios];
+
+        await this.RolesRepository.save(rol);
+
+        return { message: 'Privilegio asignado correctamente' };
     }
 
 }

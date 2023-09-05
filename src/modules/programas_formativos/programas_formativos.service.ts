@@ -37,14 +37,17 @@ export class ProgramasFormativosService {
 
 
     getPFS(){
-        return this.PFRepository.find()
+        return this.PFRepository.find({
+            relations: ['competenciaPrograma'],
+        })
     }
 
     async getPF(id: number){
         const pfFound = await this.PFRepository.findOne({
             where:{
                 idProgramaFormativo:id
-            }
+            },
+            relations: ['competenciaPrograma'],
         });
 
         if (!pfFound) {

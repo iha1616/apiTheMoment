@@ -1,6 +1,8 @@
 import { Controller,Get, Post, Put, Param, Body, ParseIntPipe, HttpException, HttpStatus  } from '@nestjs/common';
 import { AccesoService } from './acceso.service';
 import { LoginDTO } from './dto/createDtoAcces';
+import { ForgotPasswordDto } from './dto/olvidoPassword.dto';
+import { ResetPasswordDto } from './dto/restablecerPassword.dto';
 
 @Controller('acceso')
 export class AccesoController {
@@ -10,4 +12,18 @@ export class AccesoController {
    async loginValidate(@Body() access: LoginDTO) {
       return await this.accesoService.loginValidate(access);
    }
+
+
+  @Post('recuperar')
+  async recoveryPassword(@Body() recoveryDto: ForgotPasswordDto): Promise<{ message: string }> {
+    return this.accesoService.recoveryPassword(recoveryDto);
+  }
+
+  @Post('reestablecer')
+  async resetPassword(
+    @Body() resetPasswordDto: ResetPasswordDto,
+  ): Promise<{ message: string }> {
+    return this.accesoService.resetPassword(resetPasswordDto);
+  }
+
 }

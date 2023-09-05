@@ -1,6 +1,6 @@
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { AprendicesEntity, PermisosEntity, UsuariosEntity } from "..";
-//import { PrivilegiosEntity } from "./privilegios.entity";
+import { PrivilegiosEntity } from "./privilegios.entity";
 
 @Entity('roles')
 export class RolesEntity {
@@ -31,6 +31,22 @@ export class RolesEntity {
       },
    })
    permisosRol: PermisosEntity[];
+
+   @ManyToMany(() => PrivilegiosEntity, (privilegios) => privilegios.rol)
+   @JoinTable({
+      
+      name: 'roles_privilegios',
+      joinColumn: {
+         name: 'rolId',
+         referencedColumnName: 'idRol',
+      },
+      inverseJoinColumn: {
+         name: 'privilegioId',
+         referencedColumnName: 'idPrivilegio',
+      },
+   })
+   privilegiosRol: PrivilegiosEntity[];
+
 
 
  

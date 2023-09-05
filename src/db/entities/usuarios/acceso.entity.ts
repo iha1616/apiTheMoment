@@ -17,4 +17,7 @@ export class AccesoEntity {
 
    @Column()
    tablaAcceso: number;
+
+   @Column( { nullable: true})
+   forgotPassword: string;
 }

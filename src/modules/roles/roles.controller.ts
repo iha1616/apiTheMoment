@@ -30,8 +30,13 @@ export class RolesController {
         return this.rolesService.updateRol(id, roles);
     }
 
-    @Put('asignar/:id')
+    @Post('asignar/:id')
     asignarPermisosARol(@Param('id', ParseIntPipe) id: number, @Body() body: { permisosIds: number[] }) {
         return this.rolesService.asignarPermisosARol(+id, body.permisosIds);
+    }
+
+    @Post('privilegios/:id')
+    asignarPrivilegioARol(@Param('id', ParseIntPipe) id: number, @Body() body: { privilegiosIds: number[] }) {
+        return this.rolesService.asignarPrivilegiosARol(+id, body.privilegiosIds);
     }
 }

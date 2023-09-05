@@ -6,6 +6,10 @@ export class CreatePFdto{
      @IsString()
      @ApiProperty()
      nombrePF: string;
+     @IsNotEmpty()
+     @IsString()
+     @ApiProperty()
+     abreviaturaPF: string;
 
      @IsNotEmpty()
     @ApiProperty()

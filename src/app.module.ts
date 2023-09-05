@@ -21,6 +21,7 @@ import { FichaUsuarioModule } from "./modules/ficha-usuario/ficha-usuario.module
 import { CompetenciasModule } from "./modules/competencias/competencias.module";
 import { AprendicesModule } from "./modules/aprendices/aprendices.module";
 import { AccesoModule } from "./modules/acceso/acceso.module";
+import { PrivilegiosModule } from './modules/privilegios/privilegios.module';
 
 
 @Module({
@@ -28,7 +29,7 @@ import { AccesoModule } from "./modules/acceso/acceso.module";
       isGlobal: true,
       load: [config],
       envFilePath: ".env",
-   }), DatabaseModule,AccesoModule, UsuariosModule, GrupoProyectoModule, ComiteModule, QuejasModule, PlanMejoramientoModule, EntregaFichaModule, ObservacionesAprendizModule, EstadoDecisionModule, MotivosComiteModule, DecisionComiteModule, EstadoQuejasModule, TipoDocumentoModule, RolesModule, ResultadoAprendizajeModule, ProgramasFormativosModule, ProgramaCoordinacionModule, PermisosModule, FichasModule, FichaUsuarioModule, CompetenciasModule, AprendicesModule],
+   }), DatabaseModule,AccesoModule, UsuariosModule, GrupoProyectoModule, ComiteModule, QuejasModule, PlanMejoramientoModule, EntregaFichaModule, ObservacionesAprendizModule, EstadoDecisionModule, MotivosComiteModule, DecisionComiteModule, EstadoQuejasModule, TipoDocumentoModule, RolesModule, ResultadoAprendizajeModule, ProgramasFormativosModule, ProgramaCoordinacionModule, PermisosModule, FichasModule, FichaUsuarioModule, CompetenciasModule, AprendicesModule, PrivilegiosModule],
    providers: []
 })
 

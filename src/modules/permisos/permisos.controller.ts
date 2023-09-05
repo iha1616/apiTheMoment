@@ -5,7 +5,7 @@ import { PermisosEntity } from 'src/db/entities';
 import { PermisosDto, updatePermisodto } from './dto/permisosDTO';
 
 //* Titulo que muestra en swagger
-@ApiTags('Roles')
+@ApiTags('Permisos')
 @Controller('permisos')
 export class PermisosController { 
     constructor (private permisoService : PermisosService){}
@@ -28,7 +28,7 @@ export class PermisosController {
 
     }
 
-    @Put(':id')
+    @Post(':id')
     updatePermiso(@Param('id', ParseIntPipe)id: number, @Body()PermisoDTO: updatePermisodto)
     {
         return this.permisoService.updatePermiso(id,PermisoDTO)

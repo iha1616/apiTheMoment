@@ -2,8 +2,6 @@ import { Injectable, HttpException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AccesoEntity, AprendicesEntity } from 'src/db/entities';
 import { Repository } from 'typeorm';
-import { TipoDocumentoService } from '../tipo-documento/tipo-documento.service';
-import { RolesService } from '../roles/roles.service';
 import { AccesoService } from '../acceso/acceso.service';
 import { DtoAprendiz, UpdateAprendicesDto } from './dto/createDto';
 import { plainToClass } from 'class-transformer';
@@ -17,7 +15,8 @@ export class AprendicesService {
    ) { }
 
       async createAprendiz(aprendiz: DtoAprendiz): Promise<AprendicesEntity> {
-         const validateDocumento = await this.accesoService.getAccesoDocumento(aprendiz.documento)
+         const validateDocumento = await this.accesoService.
+         getAccesoDocumento(aprendiz.documento)
 
          if (validateDocumento) {
             throw "Documento ya registrado"
@@ -90,5 +89,15 @@ export class AprendicesService {
          where: { fichaAprendiz: { codigoFicha: fichaAprendiz } },
          relations: ['tipoDocumentoAprendiz', 'rolAprendiz', 'fichaAprendiz.usuarioFichaDirector', 'fichaAprendiz.programaFicha', 'grupoAprendiz']
       })
+   }
+
+   async isDocumentoDuplicado(documento: any): Promise<boolean> {
+      const aprendiz = await this.AprendizRepository.find({ where: {documento} });
+      return !!aprendiz; 
+   }
+
+   async isCorreoDuplicado(correo: string): Promise<boolean> {
+      const aprendiz = await this.AprendizRepository.find({  where :{ email: correo} });
+      return !!aprendiz; 
    }
 }
